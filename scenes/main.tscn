@@ -11,8 +11,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="ActiveWave" type="Path2D" parent="."]
-visible = false
-position = Vector2(150, 300)
+position = Vector2(140, 300)
 curve = SubResource("Curve2D_sugp2")
 script = ExtResource("1_0wfyh")
 
@@ -40,13 +39,13 @@ offset_bottom = 40.0
 [node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 10.0
+max_value = 5.0
 step = 0.1
 value = 1.0
 
 [node name="HSlider2" type="HSlider" parent="Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-max_value = 10.0
+max_value = 5.0
 step = 0.1
 value = 3.0
