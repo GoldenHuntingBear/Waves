@@ -15,10 +15,10 @@ func _ready() -> void:
 
 
 func update_function() -> void:
-	old_sin_values = get_sin_values()
+	old_sin_values = get_sin_waves()
 
 
-func get_sin_values() -> Array[SinWave]:
+func get_sin_waves() -> Array[SinWave]:
 	var values: Array[SinWave] = []
 
 	for slider in [h_slider, h_slider_2]:
@@ -26,6 +26,10 @@ func get_sin_values() -> Array[SinWave]:
 			values.append(SinWave.new(100, slider.value/100))
 
 	return values
+
+
+func get_wave_collection() -> SinWaveCollection:
+	return SinWaveCollection.new(1, get_sin_waves())
 
 
 func my_function(time: float, sin_waves: Array[SinWave]) -> float:
