@@ -7,20 +7,26 @@ extends Node2D
 @onready var ui_controller: UIController = $"../Control"
 
 @export var speed: float = 10
-@export var transition_time: float = 2
+@export var transition_time: float = 10
 
 var wave_collections: Array[SinWaveCollection] = []
 
 
 func _ready() -> void:
 	ui_controller.updated.connect(update_wave_collections)
-	ui_controller.updated.connect(func(freq): future_wave.setup(freq, speed, ui_controller.get_wave_collection()))
-	future_wave.setup(0.1, speed, ui_controller.get_wave_collection())
+	ui_controller.updated.connect(setup_future_wave)
+	setup_future_wave(0.1)
+	future_wave.position.x += transition_time * speed
 
 
 func _process(delta: float) -> void:
 	active_wave_update(delta)
-	future_wave.setup(0.1, speed, ui_controller.get_wave_collection())
+	setup_future_wave(0.1)
+	setup_transition_wave()
+
+
+func now() -> float:
+	return speed*Time.get_ticks_msec()/1000
 
 
 func active_wave_update(delta: float) -> void:
@@ -29,7 +35,7 @@ func active_wave_update(delta: float) -> void:
 
 	transition(delta)
 	active_wave.position.x -= speed*delta
-	var value = speed*Time.get_ticks_msec()/1000
+	var value = now()
 	var y = get_y(value)
 
 	active_wave.curve.add_point(Vector2(value, y))
@@ -76,3 +82,32 @@ func transition(delta: float) -> void:
 		wave_collections.remove_at(0)
 
 	# remove too small waves from [0]
+
+
+func setup_future_wave(min_freq: float) -> void:
+	future_wave.curve.clear_points()
+	var max_points = min(round(100/min_freq), 10000)
+
+	var value = now() + transition_time * speed
+
+	print("future from %d to %d" % [value, value + max_points])
+	for t in range(value, value + max_points):
+		var new_point = Vector2(
+			t-value,
+			ui_controller.get_wave_collection().function(t)
+		)
+		future_wave.curve.add_point(new_point)
+
+	future_wave.queue_redraw()
+
+
+func setup_transition_wave() -> void:
+	transition_wave.curve.clear_points()
+	var value = now()
+
+	print("transition from %d to %d" % [value, value + transition_time * speed])
+	for t in range(value, value + transition_time * speed + 1):
+		var new_point = Vector2(t-value, get_y(t))
+		transition_wave.curve.add_point(new_point)
+
+	transition_wave.queue_redraw()

@@ -32,15 +32,5 @@ func get_wave_collection() -> SinWaveCollection:
 	return SinWaveCollection.new(1, get_sin_waves())
 
 
-func my_function(time: float, sin_waves: Array[SinWave]) -> float:
-	var result = 0
-
-	for sin_wave in sin_waves:
-		result += sin_wave.amplitude*sin(2*PI*sin_wave.frequency*time)
-
-	return result
-	#return 100*sin(2*PI*h_slider.value/100*time) + 100*sin(2*PI*h_slider_2.value/100*time)
-
-
 func send_update(value: bool):
 	updated.emit(min(h_slider.value/100, h_slider_2.value/100))
