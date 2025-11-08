@@ -7,9 +7,11 @@ extends Node2D
 @onready var ui_controller: UIController = $"../Control"
 
 @export var speed: float = 10
-@export var transition_time: float = 10
+@export var transition_time: float = 5
 
 var wave_collections: Array[SinWaveCollection] = []
+
+var x: float = 0
 
 
 func _ready() -> void:
@@ -17,26 +19,24 @@ func _ready() -> void:
 	ui_controller.updated.connect(setup_future_wave)
 	setup_future_wave(0.1)
 	future_wave.position.x += transition_time * speed
+	#active_wave.position.x -= speed
 
 
 func _process(delta: float) -> void:
+	x += delta * speed
+	setup_transition_wave(delta)
 	active_wave_update(delta)
 	setup_future_wave(0.1)
-	setup_transition_wave()
-
-
-func now() -> float:
-	return speed*Time.get_ticks_msec()/1000
+	check_wave_collection()
 
 
 func active_wave_update(delta: float) -> void:
 	if len(wave_collections) == 0:
 		update_wave_collections(0)
 
-	transition(delta)
 	active_wave.position.x -= speed*delta
-	var value = now()
-	var y = get_y(value)
+	var value = x
+	var y = get_y(value, true)
 
 	active_wave.curve.add_point(Vector2(value, y))
 	if active_wave.curve.point_count >= 500:
@@ -45,69 +45,100 @@ func active_wave_update(delta: float) -> void:
 	active_wave.queue_redraw()
 
 
-func get_y(time: float) -> float:
+func get_y(time: float, debug: bool = false) -> float:
+	if len(wave_collections) == 0:
+		return 0
+
+	if len(wave_collections) < 2:
+		return wave_collections[0].function(time)
+
 	var result = 0
+	var first_collection = wave_collections[0]
+	var second_collection = wave_collections[1]
 
-	for collection in wave_collections:
-		result += collection.function(time)
+	if debug:
+		if not diminishing_wave_factor(time, first_collection.start_time) == 0.0:
+			print(time, " ", diminishing_wave_factor(time, first_collection.start_time), " ", first_collection.start_time, " ", augmenting_wave_factor(time, second_collection.start_time))
+			pass
 
+	result += first_collection.function(time) * diminishing_wave_factor(time, first_collection.start_time)
+	result += second_collection.function(time) * augmenting_wave_factor(time, second_collection.start_time)
 	return result
 
 
 func update_wave_collections(_min_freq: float):
+	var time = x
+	print("updating wave collections with time %f" % time)
+
 	if len(wave_collections) == 0:
-		wave_collections.append(ui_controller.get_wave_collection())
+		wave_collections.append(ui_controller.get_wave_collection(time))
 		return
 
 	if len(wave_collections) == 2:
-		var new_first_collection = wave_collections[0].change_amplitude(1)
-		new_first_collection.add(wave_collections[1])
+		var new_first_collection = wave_collections[0].change_amplitude(1, time)
+		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
+
+		if second_wave_factor > 0.05:
+			new_first_collection.add(wave_collections[1].change_amplitude(second_wave_factor, time))
+
 		wave_collections[0] = new_first_collection
-		wave_collections[1] = SinWaveCollection.new(0, ui_controller.get_sin_waves())
+		wave_collections[1] = SinWaveCollection.new(1, ui_controller.get_sin_waves(), time)
 	else:
-		wave_collections.append(SinWaveCollection.new(0, ui_controller.get_sin_waves()))
+		wave_collections[0].start_time = time
+		wave_collections.append(SinWaveCollection.new(1, ui_controller.get_sin_waves(), time))
 
 
-func transition(delta: float) -> void:
-	if len(wave_collections) <= 1:
+func diminishing_wave_factor(time: float, start_time: float) -> float:
+	if time < start_time:
+		return 1
+
+	return max(-time / transition_time + (start_time / transition_time) + 1, 0)
+
+
+func augmenting_wave_factor(time: float, start_time: float) -> float:
+	if time < start_time:
+		return 0
+
+	return min(time / transition_time - (start_time / transition_time), 1)
+
+
+func check_wave_collection() -> void:
+	if len(wave_collections) < 2:
 		return
 
-	wave_collections[0].amplitude -= delta / transition_time
-	wave_collections[1].amplitude += delta / transition_time
+	var time = x
 
-	if wave_collections[1].amplitude > 1:
-		wave_collections[1].amplitude = 1
-
-	if wave_collections[0].amplitude < 0.01:
+	if diminishing_wave_factor(time, wave_collections[0].start_time) == 0.0:
+		print("deleting first wave collection")
 		wave_collections.remove_at(0)
-
-	# remove too small waves from [0]
 
 
 func setup_future_wave(min_freq: float) -> void:
 	future_wave.curve.clear_points()
 	var max_points = min(round(100/min_freq), 10000)
 
-	var value = now() + transition_time * speed
+	var value = x + transition_time * speed
 
-	print("future from %d to %d" % [value, value + max_points])
 	for t in range(value, value + max_points):
 		var new_point = Vector2(
 			t-value,
-			ui_controller.get_wave_collection().function(t)
+			ui_controller.get_wave_collection(t).function(t)
 		)
 		future_wave.curve.add_point(new_point)
 
 	future_wave.queue_redraw()
 
 
-func setup_transition_wave() -> void:
+func setup_transition_wave(delta: float) -> void:
 	transition_wave.curve.clear_points()
-	var value = now()
+	var time = x
 
-	print("transition from %d to %d" % [value, value + transition_time * speed])
-	for t in range(value, value + transition_time * speed + 1):
-		var new_point = Vector2(t-value, get_y(t))
+	var value = time
+	print("transition starts at %f" % (value))
+
+	while value < time + transition_time * speed + 1:
+		var new_point = Vector2(value-time, get_y(value))
 		transition_wave.curve.add_point(new_point)
+		value += delta
 
 	transition_wave.queue_redraw()

@@ -10,12 +10,6 @@ var old_sin_values = []
 func _ready() -> void:
 	h_slider.value_changed.connect(send_update)
 	h_slider_2.value_changed.connect(send_update)
-	h_slider.drag_started.connect(update_function)
-	h_slider_2.drag_started.connect(update_function)
-
-
-func update_function() -> void:
-	old_sin_values = get_sin_waves()
 
 
 func get_sin_waves() -> Array[SinWave]:
@@ -28,9 +22,11 @@ func get_sin_waves() -> Array[SinWave]:
 	return values
 
 
-func get_wave_collection() -> SinWaveCollection:
-	return SinWaveCollection.new(1, get_sin_waves())
+func get_wave_collection(start_time: float) -> SinWaveCollection:
+	return SinWaveCollection.new(1, get_sin_waves(), start_time)
 
 
 func send_update(value: bool):
+	var time = (Time.get_ticks_msec()/100.0)
+	print("sending update at %f" % time)
 	updated.emit(min(h_slider.value/100, h_slider_2.value/100))

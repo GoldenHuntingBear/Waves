@@ -30,7 +30,7 @@ centered = false
 script = ExtResource("1_jyhfs")
 
 [node name="ActiveWave" type="Path2D" parent="WaveController"]
-position = Vector2(140, 300)
+position = Vector2(150, 300)
 curve = SubResource("Curve2D_sugp2")
 script = ExtResource("1_0wfyh")
 
