@@ -16,3 +16,7 @@ func multiply(value: float) -> SinWave:
 
 func function(time: float) -> float:
 	return self.amplitude*sin(2*PI*self.frequency*time)
+
+
+func tangent(time: float) -> float:
+	return 2*PI*self.amplitude*self.frequency*cos(2*PI*self.frequency*time)

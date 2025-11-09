@@ -1,4 +1,5 @@
 extends Node2D
+class_name WaveController
 
 @onready var active_wave: Path2D = $ActiveWave
 @onready var future_wave: Path2D = $FutureWave
@@ -66,6 +67,22 @@ func get_y(time: float, debug: bool = false) -> float:
 	return result
 
 
+func get_tangent(time: float) -> float:
+	if len(wave_collections) == 0:
+		return 0
+
+	if len(wave_collections) < 2:
+		return wave_collections[0].tangent(time)
+
+	var result = 0
+	var first_collection = wave_collections[0]
+	var second_collection = wave_collections[1]
+
+	result += first_collection.tangent(time) * diminishing_wave_factor(time, first_collection.start_time)
+	result += second_collection.tangent(time) * augmenting_wave_factor(time, second_collection.start_time)
+	return result
+
+
 func update_wave_collections(_min_freq: float):
 	var time = x
 	print("updating wave collections with time %f" % time)
@@ -92,14 +109,18 @@ func diminishing_wave_factor(time: float, start_time: float) -> float:
 	if time < start_time:
 		return 1
 
-	return max(-time / transition_time + (start_time / transition_time) + 1, 0)
+	var transition = transition_time * speed
+
+	return max(-time / transition + (start_time / transition) + 1, 0)
 
 
 func augmenting_wave_factor(time: float, start_time: float) -> float:
 	if time < start_time:
 		return 0
 
-	return min(time / transition_time - (start_time / transition_time), 1)
+	var transition = transition_time * speed
+
+	return min(time / transition - (start_time / transition), 1)
 
 
 func check_wave_collection() -> void:
@@ -134,7 +155,7 @@ func setup_transition_wave(delta: float) -> void:
 	var time = x
 
 	var value = time
-	print("transition starts at %f" % (value))
+	#print("transition starts at %f" % (value))
 
 	while value < time + transition_time * speed + 1:
 		var new_point = Vector2(value-time, get_y(value))

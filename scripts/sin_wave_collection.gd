@@ -32,3 +32,12 @@ func function(time: float) -> float:
 		result += wave.function(time)
 
 	return amplitude * result
+
+
+func tangent(time: float) -> float:
+	var result = 0
+
+	for wave in waves:
+		result += wave.tangent(time)
+
+	return amplitude * result
