@@ -37,7 +37,7 @@ func active_wave_update(delta: float) -> void:
 
 	active_wave.position.x -= speed*delta
 	var value = x
-	var y = get_y(value, true)
+	var y = get_y(value)
 
 	active_wave.curve.add_point(Vector2(value, y))
 	if active_wave.curve.point_count >= 500:
@@ -95,7 +95,7 @@ func update_wave_collections(_min_freq: float):
 		var new_first_collection = wave_collections[0].change_amplitude(1, time)
 		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
 
-		if second_wave_factor > 0.05:
+		if second_wave_factor > 0.01:
 			new_first_collection.add(wave_collections[1].change_amplitude(second_wave_factor, time))
 
 		wave_collections[0] = new_first_collection
