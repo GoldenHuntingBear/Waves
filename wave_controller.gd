@@ -9,6 +9,7 @@ class_name WaveController
 
 @export var speed: float = 10
 @export var transition_time: float = 5
+@export var wave_factor_threshold = 0.05
 
 var wave_collections: Array[SinWaveCollection] = []
 
@@ -85,7 +86,7 @@ func get_tangent(time: float) -> float:
 
 func update_wave_collections(_min_freq: float):
 	var time = x
-	print("updating wave collections with time %f" % time)
+	#print("updating wave collections with time %f" % time)
 
 	if len(wave_collections) == 0:
 		wave_collections.append(ui_controller.get_wave_collection(time))
@@ -95,7 +96,7 @@ func update_wave_collections(_min_freq: float):
 		var new_first_collection = wave_collections[0].change_amplitude(1, time)
 		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
 
-		if second_wave_factor > 0.01:
+		if second_wave_factor > wave_factor_threshold:
 			new_first_collection.add(wave_collections[1].change_amplitude(second_wave_factor, time))
 
 		wave_collections[0] = new_first_collection
@@ -110,8 +111,9 @@ func diminishing_wave_factor(time: float, start_time: float) -> float:
 		return 1
 
 	var transition = transition_time * speed
+	var value = time/transition - start_time/transition
 
-	return max(-time / transition + (start_time / transition) + 1, 0)
+	return cos(PI/2 * min(value, 1))
 
 
 func augmenting_wave_factor(time: float, start_time: float) -> float:
@@ -119,8 +121,9 @@ func augmenting_wave_factor(time: float, start_time: float) -> float:
 		return 0
 
 	var transition = transition_time * speed
+	var value = time/transition - start_time/transition
 
-	return min(time / transition - (start_time / transition), 1)
+	return sin(PI/2 * min(value, 1))
 
 
 func check_wave_collection() -> void:
@@ -129,9 +132,15 @@ func check_wave_collection() -> void:
 
 	var time = x
 
-	if diminishing_wave_factor(time, wave_collections[0].start_time) == 0.0:
+	var wave_factor = diminishing_wave_factor(time, wave_collections[0].start_time)
+
+	if wave_factor == 0.0:
 		print("deleting first wave collection")
 		wave_collections.remove_at(0)
+
+	for wave in wave_collections[0].waves:
+		if wave_factor * wave.amplitude < wave_factor_threshold:
+			wave_collections[0].waves.erase(wave)
 
 
 func setup_future_wave(min_freq: float) -> void:

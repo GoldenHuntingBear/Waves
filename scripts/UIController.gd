@@ -28,5 +28,5 @@ func get_wave_collection(start_time: float) -> SinWaveCollection:
 
 func send_update(value: bool):
 	var time = (Time.get_ticks_msec()/100.0)
-	print("sending update at %f" % time)
+	#print("sending update at %f" % time)
 	updated.emit(min(h_slider.value/100, h_slider_2.value/100))
