@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dtdsgo5copu4j"]
+[gd_scene load_steps=15 format=3 uid="uid://dtdsgo5copu4j"]
 
 [ext_resource type="Texture2D" uid="uid://brliwhjkrkjnl" path="res://assets/BottomRightLeg.svg" id="1_53v7d"]
 [ext_resource type="Texture2D" uid="uid://jgekqbgidwk3" path="res://assets/BottomBack.svg" id="1_pry4r"]
+[ext_resource type="Script" uid="uid://634yudi5tvrf" path="res://scripts/character_controller.gd" id="1_q6urs"]
 [ext_resource type="Texture2D" uid="uid://bxjmht47lvxvx" path="res://assets/BottomLeftArm.svg" id="2_fwsyb"]
 [ext_resource type="Texture2D" uid="uid://dfr5kb334f833" path="res://assets/BottomLeftLeg.svg" id="3_25pii"]
 [ext_resource type="Texture2D" uid="uid://jyocss0cmepi" path="res://assets/BottomRightArm.svg" id="4_exdhi"]
@@ -13,9 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://ckcj6amusgf0l" path="res://assets/TopRightArm.svg" id="11_356g5"]
 [ext_resource type="Texture2D" uid="uid://plxgsdy16gxa" path="res://assets/TopRightLeg.svg" id="12_6q5bf"]
 
-[node name="Character" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkiy7"]
+radius = 153.0
+height = 718.0
+
+[node name="Character" type="CharacterBody2D"]
+script = ExtResource("1_q6urs")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
+position = Vector2(0, -354)
 
 [node name="BottomBack" type="Bone2D" parent="Skeleton2D"]
 position = Vector2(0, -16)
@@ -112,3 +119,7 @@ texture = ExtResource("4_exdhi")
 [node name="TopRightArm" type="Sprite2D" parent="Skeleton2D/TopBack/TopRightArm"]
 position = Vector2(12, 137)
 texture = ExtResource("11_356g5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -344)
+shape = SubResource("CapsuleShape2D_lkiy7")
