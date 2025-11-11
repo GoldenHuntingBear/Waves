@@ -44,17 +44,17 @@ texture = ExtResource("1_ya4ey")
 script = ExtResource("1_jyhfs")
 
 [node name="ActiveWave" type="Path2D" parent="WaveController"]
-position = Vector2(150, 300)
+position = Vector2(150, 360)
 curve = SubResource("Curve2D_sugp2")
 script = ExtResource("1_0wfyh")
 
 [node name="TransitionWave" type="Path2D" parent="WaveController"]
-position = Vector2(150, 300)
+position = Vector2(150, 360)
 curve = SubResource("Curve2D_jyhfs")
 script = ExtResource("4_tbgi4")
 
 [node name="FutureWave" type="Path2D" parent="WaveController"]
-position = Vector2(150, 300)
+position = Vector2(150, 360)
 curve = SubResource("Curve2D_0xm2m")
 script = ExtResource("1_o5qli")
 
@@ -101,7 +101,7 @@ position = Vector2(1300, 300)
 [node name="Obstacles" type="Node2D" parent="ObstacleController"]
 
 [node name="Character" parent="." instance=ExtResource("9_ya4ey")]
-position = Vector2(150, 300)
+position = Vector2(150, 360)
 scale = Vector2(0.04, 0.04)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

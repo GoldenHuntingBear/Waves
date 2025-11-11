@@ -15,7 +15,7 @@ void fragment() {
 	vec3 scanlines = vec3(sin(2.0 * warped_uv.y * 180.0) * 0.1 + 0.8);
 	vec3 vignette = vec3(length(pow(abs(centered_uv), vec2(4.0)) / 3.0));
 	
-	vec3 screen_color = textureLod(screen_texture, (warped_uv + 1.0)/2.0, 0.2).rgb * cutoff * scanlines;
+	vec3 screen_color = textureLod(screen_texture, (warped_uv + 1.0)/2.0, 0.1).rgb * cutoff * scanlines;
 	screen_color -= vignette * vignette_multiplier;
 	COLOR = vec4(screen_color, 1.0);
 }
