@@ -9,7 +9,7 @@ class_name WaveController
 
 @export var speed: float = 10
 @export var transition_time: float = 5
-@export var wave_factor_threshold = 0.05
+@export var wave_factor_threshold = 0.03
 
 var wave_collections: Array[SinWaveCollection] = []
 

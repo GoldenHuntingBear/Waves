@@ -13,7 +13,7 @@ const OBSTACLE_MAX_TIME: float = 100
 
 func _ready() -> void:
 	timer.timeout.connect(spawn_obs)
-	reset_timer()
+	spawn_obs()
 
 
 func _process(delta: float) -> void:
@@ -25,12 +25,13 @@ func spawn_obs():
 	var obs = obs_scene.instantiate()
 	obs.position = spawn_position_default.position
 	obs_parent.add_child(obs)
+	obs.size_and_position_setup()
 	reset_timer()
 
 
 func reset_timer():
 	print("reset timer")
-	timer.wait_time = (randf()*(OBSTACLE_MAX_TIME-OBSTACLE_MIN_TIME) + OBSTACLE_MIN_TIME) / wave_controller.speed
+	timer.wait_time = randf_range(OBSTACLE_MIN_TIME, OBSTACLE_MAX_TIME) # / wave_controller.speed
 	timer.start()
 
 
