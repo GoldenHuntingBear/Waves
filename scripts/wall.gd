@@ -2,7 +2,6 @@ extends Area2D
 class_name Wall
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
-@onready var sprite_2d: Sprite2D = $Sprite2D
 var screen_size: Vector2 = Vector2(1280, 720)
 
 

@@ -19,4 +19,7 @@ func function(time: float) -> float:
 
 
 func tangent(time: float) -> float:
+	#var temp = PI/2 + 2*PI*self.frequency*time
+	#var dividor = floor(temp / (2*PI))
+	#return - temp + dividor * 2 * PI + PI
 	return 2*PI*self.amplitude*self.frequency*cos(2*PI*self.frequency*time)

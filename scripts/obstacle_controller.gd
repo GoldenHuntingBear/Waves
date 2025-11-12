@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move_obstacles(delta)
+	check_positions()
 
 
 func spawn_obs():
@@ -38,3 +39,13 @@ func reset_timer():
 func move_obstacles(delta: float):
 	for obs in obs_parent.get_children():
 		obs.position.x -= delta * wave_controller.speed
+
+
+func check_positions():
+	if not obs_parent.get_children():
+		return
+
+	var first_child = obs_parent.get_children()[0]
+
+	if first_child.position.x < -20:
+		first_child.queue_free()

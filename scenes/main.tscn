@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://2f3axxmf3kj5"]
+[gd_scene load_steps=21 format=3 uid="uid://2f3axxmf3kj5"]
 
 [ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://wave_controller.gd" id="1_jyhfs"]
@@ -11,6 +11,8 @@
 [ext_resource type="Shader" uid="uid://bo12kjbqjv4v4" path="res://shaders/screen_effect.gdshader" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dtdsgo5copu4j" path="res://scenes/Character.tscn" id="9_ya4ey"]
 [ext_resource type="Shader" uid="uid://d0we7e3e7yx4a" path="res://shaders/screen_pixelation.gdshader" id="11_ya4ey"]
+[ext_resource type="Script" uid="uid://cbj6w55sh8vpc" path="res://reward_controller.gd" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://mlcuovhkie85" path="res://scenes/coin.tscn" id="13_trceg"]
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 
@@ -37,7 +39,7 @@ center_offset = Vector3(640, 360, 0)
 [node name="Node2D" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(640.5, 353)
+position = Vector2(640, 360)
 texture = ExtResource("1_ya4ey")
 
 [node name="WaveController" type="Node2D" parent="."]
@@ -96,13 +98,23 @@ obs_scene = ExtResource("8_tipki")
 one_shot = true
 
 [node name="SpawnPositionDefault" type="Node2D" parent="ObstacleController"]
-position = Vector2(1300, 300)
+position = Vector2(1300, 360)
 
 [node name="Obstacles" type="Node2D" parent="ObstacleController"]
 
 [node name="Character" parent="." instance=ExtResource("9_ya4ey")]
 position = Vector2(150, 360)
 scale = Vector2(0.04, 0.04)
+
+[node name="RewardController" type="Node2D" parent="."]
+script = ExtResource("12_eb6dy")
+coin_scene = ExtResource("13_trceg")
+
+[node name="Timer" type="Timer" parent="RewardController"]
+one_shot = true
+
+[node name="Rewards" type="Node2D" parent="RewardController"]
+position = Vector2(1300, 360)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
