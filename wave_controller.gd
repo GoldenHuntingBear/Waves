@@ -113,7 +113,8 @@ func diminishing_wave_factor(time: float, start_time: float) -> float:
 	var transition = transition_time * speed
 	var value = time/transition - start_time/transition
 
-	return cos(PI/2 * min(value, 1))
+	return max(-value + 1, 0)
+	#return cos(PI/2 * min(value, 1))
 
 
 func augmenting_wave_factor(time: float, start_time: float) -> float:
@@ -123,7 +124,8 @@ func augmenting_wave_factor(time: float, start_time: float) -> float:
 	var transition = transition_time * speed
 	var value = time/transition - start_time/transition
 
-	return sin(PI/2 * min(value, 1))
+	return min(value, 1)
+	#return sin(PI/2 * min(value, 1))
 
 
 func check_wave_collection() -> void:
@@ -172,3 +174,36 @@ func setup_transition_wave(delta: float) -> void:
 		value += delta
 
 	transition_wave.queue_redraw()
+
+
+func transition_wave_splines():
+	transition_wave.curve.clear_points()
+
+	if len(wave_collections) == 0:
+		return
+
+	var second_collection
+	if len(wave_collections) == 1:
+		second_collection = wave_collections[0]
+	else:
+		second_collection = wave_collections[1]
+
+	var y = get_y(x)
+	var first_point = Vector2(0, y)
+	var first_spline = get_spline(x, y, wave_collections[0], 30)
+	transition_wave.curve.add_point(first_point, -first_spline, first_spline)
+
+	var new_x = x + transition_time * speed
+	var second_point = Vector2(new_x-x, second_collection.function(new_x))
+	var second_spline = get_spline(new_x, second_collection.function(new_x), second_collection, 30)
+	transition_wave.curve.add_point(second_point, -second_spline, second_spline)
+
+	transition_wave.queue_redraw()
+
+
+func get_spline(center_x: float, center_y: float, collection: SinWaveCollection, size: float) -> Vector2:
+	var slope = -collection.tangent(center_x)
+	var b = center_y - slope * center_x
+	var y = slope * (center_x - size) + b
+	var spline = Vector2(size, y-center_y)
+	return spline
