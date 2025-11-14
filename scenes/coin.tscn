@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://mlcuovhkie85"]
 
-[ext_resource type="Script" uid="uid://nmlhpfhef5cv" path="res://coin.gd" id="1_rwqht"]
+[ext_resource type="Script" uid="uid://nmlhpfhef5cv" path="res://scripts/coin.gd" id="1_rwqht"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rwqht"]
 radius = 20.09975
