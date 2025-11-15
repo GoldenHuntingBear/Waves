@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://2f3axxmf3kj5"]
+[gd_scene load_steps=25 format=3 uid="uid://2f3axxmf3kj5"]
 
 [ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://errplgwyrdfm" path="res://scenes/radio.tscn" id="1_a8y0u"]
 [ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://scripts/wave_controller.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://dn05votnfqpwh" path="res://scripts/future_wave.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://7xblgqh6jc0n" path="res://assets/screen_background.svg" id="1_ya4ey"]
@@ -13,7 +14,6 @@
 [ext_resource type="Shader" uid="uid://d0we7e3e7yx4a" path="res://shaders/screen_pixelation.gdshader" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://cbj6w55sh8vpc" path="res://scripts/reward_controller.gd" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://mlcuovhkie85" path="res://scenes/coin.tscn" id="13_trceg"]
-[ext_resource type="PackedScene" uid="uid://ivkqvslphc3f" path="res://assets/radio.blend" id="14_a8y0u"]
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 
@@ -37,31 +37,26 @@ shader_parameter/opacity = 1.0
 size = Vector2(1280, 720)
 center_offset = Vector3(640, 360, 0)
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_trceg"]
+viewport_path = NodePath("SubViewport")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(640, 360)
-texture = ExtResource("1_ya4ey")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8y0u"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_trceg")
 
-[node name="WaveController" type="Node2D" parent="."]
-script = ExtResource("1_jyhfs")
+[sub_resource type="QuadMesh" id="QuadMesh_jkv2x"]
+resource_local_to_scene = true
+size = Vector2(128, 72)
 
-[node name="ActiveWave" type="Path2D" parent="WaveController"]
-position = Vector2(150, 360)
-curve = SubResource("Curve2D_sugp2")
-script = ExtResource("1_0wfyh")
+[node name="Main" type="Node3D"]
 
-[node name="TransitionWave" type="Path2D" parent="WaveController"]
-position = Vector2(150, 360)
-curve = SubResource("Curve2D_jyhfs")
-script = ExtResource("4_tbgi4")
+[node name="radio" parent="." instance=ExtResource("1_a8y0u")]
+transform = Transform3D(-0.9152307, 0, -3.347126, 0, 3.4700005, 0, 3.347126, 0, -0.9152307, -69.020226, -13.389648, 14.389877)
 
-[node name="FutureWave" type="Path2D" parent="WaveController"]
-position = Vector2(150, 360)
-curve = SubResource("Curve2D_0xm2m")
-script = ExtResource("1_o5qli")
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(1280, 720)
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="SubViewport"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,63 +67,92 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2_0wfyh")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SubViewport/Control"]
 layout_mode = 0
 offset_right = 270.0
 offset_bottom = 40.0
 
-[node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="SubViewport/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 3.0
 step = 0.01
 value = 0.5
 
-[node name="HSlider2" type="HSlider" parent="Control/VBoxContainer"]
+[node name="HSlider2" type="HSlider" parent="SubViewport/Control/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 3.0
 step = 0.01
 value = 1.0
 
-[node name="ObstacleController" type="Node2D" parent="."]
+[node name="Background" type="Sprite2D" parent="SubViewport"]
+position = Vector2(640, 360)
+texture = ExtResource("1_ya4ey")
+
+[node name="WaveController" type="Node2D" parent="SubViewport"]
+script = ExtResource("1_jyhfs")
+
+[node name="ActiveWave" type="Path2D" parent="SubViewport/WaveController"]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_sugp2")
+script = ExtResource("1_0wfyh")
+
+[node name="TransitionWave" type="Path2D" parent="SubViewport/WaveController"]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_jyhfs")
+script = ExtResource("4_tbgi4")
+
+[node name="FutureWave" type="Path2D" parent="SubViewport/WaveController"]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_0xm2m")
+script = ExtResource("1_o5qli")
+
+[node name="ObstacleController" type="Node2D" parent="SubViewport"]
 script = ExtResource("7_o6xl0")
 obs_scene = ExtResource("8_tipki")
 
-[node name="Timer" type="Timer" parent="ObstacleController"]
+[node name="Timer" type="Timer" parent="SubViewport/ObstacleController"]
 one_shot = true
 
-[node name="SpawnPositionDefault" type="Node2D" parent="ObstacleController"]
+[node name="SpawnPositionDefault" type="Node2D" parent="SubViewport/ObstacleController"]
 position = Vector2(1300, 360)
 
-[node name="Obstacles" type="Node2D" parent="ObstacleController"]
+[node name="Obstacles" type="Node2D" parent="SubViewport/ObstacleController"]
 
-[node name="Character" parent="." instance=ExtResource("9_ya4ey")]
+[node name="Character" parent="SubViewport" instance=ExtResource("9_ya4ey")]
 position = Vector2(150, 360)
 scale = Vector2(0.04, 0.04)
 
-[node name="RewardController" type="Node2D" parent="."]
+[node name="RewardController" type="Node2D" parent="SubViewport"]
 script = ExtResource("12_eb6dy")
 coin_scene = ExtResource("13_trceg")
 
-[node name="Timer" type="Timer" parent="RewardController"]
+[node name="Timer" type="Timer" parent="SubViewport/RewardController"]
 one_shot = true
 
-[node name="Rewards" type="Node2D" parent="RewardController"]
+[node name="Rewards" type="Node2D" parent="SubViewport/RewardController"]
 position = Vector2(1300, 360)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
 
-[node name="ScreenEffect" type="MeshInstance2D" parent="CanvasLayer"]
+[node name="ScreenEffect" type="MeshInstance2D" parent="SubViewport/CanvasLayer"]
 material = SubResource("ShaderMaterial_choun")
 mesh = SubResource("QuadMesh_tipki")
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="CanvasLayer"]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewport/CanvasLayer"]
 copy_mode = 2
 
-[node name="ScreenPixelation" type="MeshInstance2D" parent="CanvasLayer"]
+[node name="ScreenPixelation" type="MeshInstance2D" parent="SubViewport/CanvasLayer"]
 material = SubResource("ShaderMaterial_ya4ey")
 mesh = SubResource("QuadMesh_eb6dy")
 
-[node name="radio" parent="." instance=ExtResource("14_a8y0u")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9486303, 4.7683716e-07, -3.7796707)
+[node name="Screen" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_a8y0u")
+mesh = SubResource("QuadMesh_jkv2x")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.532349, 73.05267)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 534, 0)

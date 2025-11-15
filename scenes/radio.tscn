@@ -1,5 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://errplgwyrdfm"]
+[gd_scene load_steps=5 format=3 uid="uid://errplgwyrdfm"]
 
 [ext_resource type="PackedScene" uid="uid://ivkqvslphc3f" path="res://assets/radio.blend" id="1_y83x7"]
+[ext_resource type="Script" uid="uid://d11in0r1kggd8" path="res://scenes/radio_controller.gd" id="2_ldjbc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y83x7"]
+size = Vector3(1.6550293, 1.7293701, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldjbc"]
 
 [node name="radio" instance=ExtResource("1_y83x7")]
+script = ExtResource("2_ldjbc")
+
+[node name="MainSelectorArea" type="Area3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8435068, 2.6170259, -2.0309858)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainSelectorArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020446777, 0)
+shape = SubResource("BoxShape3D_y83x7")
+
+[node name="VolumeSelectorArea" type="Area3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4618819, 1.4557496, -2.0309858)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VolumeSelectorArea" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020446777, 0)
+shape = SubResource("BoxShape3D_ldjbc")
