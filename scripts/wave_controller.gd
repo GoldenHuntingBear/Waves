@@ -5,7 +5,7 @@ class_name WaveController
 @onready var future_wave: Path2D = $FutureWave
 @onready var transition_wave: Path2D = $TransitionWave
 
-@onready var ui_controller: UIController = $"../Control"
+@onready var ui_controller: UIController = $"../../Control"
 
 @export var speed: float = 10
 @export var transition_time: float = 5
@@ -86,7 +86,7 @@ func get_tangent(time: float) -> float:
 
 func update_wave_collections(_min_freq: float):
 	var time = x
-	#print("updating wave collections with time %f" % time)
+	print("updating wave collections with time %f" % time)
 
 	if len(wave_collections) == 0:
 		wave_collections.append(ui_controller.get_wave_collection(time))
@@ -139,9 +139,11 @@ func check_wave_collection() -> void:
 	if wave_factor == 0.0:
 		print("deleting first wave collection")
 		wave_collections.remove_at(0)
+		return
 
 	for wave in wave_collections[0].waves:
 		if wave_factor * wave.amplitude < wave_factor_threshold:
+			print("removing a wave")
 			wave_collections[0].waves.erase(wave)
 
 
@@ -164,7 +166,6 @@ func setup_future_wave(min_freq: float) -> void:
 func setup_transition_wave(delta: float) -> void:
 	transition_wave.curve.clear_points()
 	var time = x
-
 	var value = time
 	#print("transition starts at %f" % (value))
 

@@ -1,4 +1,5 @@
 extends Node3D
+class_name RadioController
 
 @onready var main_selector_area: Area3D = $MainSelectorArea
 @onready var volume_selector_area: Area3D = $VolumeSelectorArea
@@ -11,6 +12,8 @@ var mouse_clicked: bool = false
 var mouse_position_when_clicked
 var in_area: bool = false
 var starting_rotation: float = 0
+
+signal updated(frequency)
 
 
 func _ready() -> void:
@@ -46,6 +49,7 @@ func _process(_delta: float) -> void:
 
 		var new_rotation = (mouse_position.x - mouse_position_when_clicked.x) * 0.01 + starting_rotation
 		selected_selector.rotation.z = clamp(new_rotation, deg_to_rad(min_rotation), deg_to_rad(max_rotation))
+		updated.emit(get_sin_wave().frequency)
 
 
 func _input(event):
@@ -78,3 +82,15 @@ func end_selector_control(selector: Area3D):
 
 	if not mouse_clicked:
 		selected_selector = null
+
+
+func get_sin_wave() -> SinWave:
+	var amplitude = change_max_min(rad_to_deg(volume_selector.rotation.z), -130, 130, 0, 100)
+	var frequency = change_max_min(rad_to_deg(main_selector.rotation.z), -90, 90, 1, 3) / 1000
+	#print(main_selector.rotation.z, " ", frequency)
+	return SinWave.new(amplitude, frequency)
+
+
+func change_max_min(value: float, old_min: float, old_max: float, new_min: float, new_max: float) -> float:
+	var one_to_zero = (value - old_min) / (old_max - old_min)
+	return one_to_zero * (new_max - new_min) + new_min

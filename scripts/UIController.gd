@@ -3,13 +3,15 @@ class_name UIController
 
 @onready var h_slider: HSlider = $VBoxContainer/HSlider
 @onready var h_slider_2: HSlider = $VBoxContainer/HSlider2
+@onready var radio: RadioController = $"../radio"
+
 signal updated(min_freq)
-var old_sin_values = []
 
 
 func _ready() -> void:
 	h_slider.value_changed.connect(send_update)
 	h_slider_2.value_changed.connect(send_update)
+	radio.updated.connect(send_update)
 
 
 func get_sin_waves() -> Array[SinWave]:
@@ -19,6 +21,9 @@ func get_sin_waves() -> Array[SinWave]:
 		if slider:
 			values.append(SinWave.new(100, slider.value/100))
 
+	if radio:
+		values.append(radio.get_sin_wave())
+
 	return values
 
 
@@ -27,6 +32,5 @@ func get_wave_collection(start_time: float) -> SinWaveCollection:
 
 
 func send_update(value: bool):
-	var time = (Time.get_ticks_msec()/100.0)
-	#print("sending update at %f" % time)
+	print("send update")
 	updated.emit(min(h_slider.value/100, h_slider_2.value/100))

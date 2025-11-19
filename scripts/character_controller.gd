@@ -5,10 +5,15 @@ var score: int = 0
 
 
 func _physics_process(_delta: float) -> void:
-	var new_y = 300.0 + wave_controller.get_y(wave_controller.x)
+	var new_y = 360.0 + wave_controller.get_y(wave_controller.x)
 	position.y = new_y
-	#print(wave_controller.get_tangent(wave_controller.x))
-	rotation = deg_to_rad(wave_controller.get_tangent(wave_controller.x)*45)
+
+	if len(wave_controller.wave_collections) < 1:
+		return
+
+	var center = Vector2(wave_controller.x, wave_controller.get_y(wave_controller.x))
+	var spline = wave_controller.get_spline(center.x, center.y, wave_controller.wave_collections[0], 20)
+	rotation = -(spline + center).angle_to(center)
 
 
 func take_damage():
