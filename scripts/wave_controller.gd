@@ -18,10 +18,9 @@ var x: float = 0
 
 func _ready() -> void:
 	ui_controller.updated.connect(update_wave_collections)
-	ui_controller.updated.connect(setup_future_wave)
+	#ui_controller.updated.connect(setup_future_wave)
 	setup_future_wave(0.1)
 	future_wave.position.x += transition_time * speed
-	#active_wave.position.x -= speed
 
 
 func _process(delta: float) -> void:
@@ -149,11 +148,12 @@ func check_wave_collection() -> void:
 
 func setup_future_wave(min_freq: float) -> void:
 	future_wave.curve.clear_points()
-	var max_points = min(round(100/min_freq), 10000)
+	#var max_points = min(round(1/min_freq), 1000)
+	#print(max_points)
 
 	var value = x + transition_time * speed
 
-	for t in range(value, value + max_points):
+	for t in range(value, value + 2000):
 		var new_point = Vector2(
 			t-value,
 			ui_controller.get_wave_collection(t).function(t)

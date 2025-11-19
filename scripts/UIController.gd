@@ -32,5 +32,11 @@ func get_wave_collection(start_time: float) -> SinWaveCollection:
 
 
 func send_update(value: bool):
-	print("send update")
-	updated.emit(min(h_slider.value/100, h_slider_2.value/100))
+	#print("send update")
+	var min_frequency = 10000
+
+	for frequency in [h_slider.value/100, h_slider_2.value/100, radio.get_sin_wave().frequency]:
+		if frequency > 0 and frequency < min_frequency:
+			min_frequency = frequency
+
+	updated.emit(min_frequency)
