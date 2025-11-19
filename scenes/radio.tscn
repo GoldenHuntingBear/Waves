@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://errplgwyrdfm"]
 
 [ext_resource type="PackedScene" uid="uid://ivkqvslphc3f" path="res://assets/radio.blend" id="1_y83x7"]
-[ext_resource type="Script" uid="uid://d11in0r1kggd8" path="res://scenes/radio_controller.gd" id="2_ldjbc"]
+[ext_resource type="Script" uid="uid://d11in0r1kggd8" path="res://scripts/radio_controller.gd" id="2_ldjbc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y83x7"]
 size = Vector3(1.6550293, 1.7293701, 1)
