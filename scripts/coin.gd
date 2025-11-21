@@ -14,3 +14,7 @@ func check_collision(body: Node2D):
 		print("character collision")
 		body.add_score(1)
 		queue_free()
+
+	if body.get_class() == "Wall":
+		print("in wall")
+		queue_free()

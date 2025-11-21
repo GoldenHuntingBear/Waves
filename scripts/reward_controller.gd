@@ -6,8 +6,8 @@ class_name RewardController
 @onready var rewards_parent: Node2D = $Rewards
 @onready var wave_controller: WaveController = $"../WaveController"
 
-const REWARD_MIN_TIME: float = 1
-const REWARD_MAX_TIME: float = 10
+const REWARD_MIN_TIME: float = 3
+const REWARD_MAX_TIME: float = 4# 10
 
 
 func _ready() -> void:
@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 func spawn_reward():
 	var coin: Node2D = coin_scene.instantiate()
 	rewards_parent.add_child(coin)
+	coin.position.y = randf_range(-640 + 100, 640 - 100)
 	reset_timer()
 
 

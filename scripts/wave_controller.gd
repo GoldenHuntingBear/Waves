@@ -85,7 +85,7 @@ func get_tangent(time: float) -> float:
 
 func update_wave_collections(_min_freq: float):
 	var time = x
-	print("updating wave collections with time %f" % time)
+	#print("updating wave collections with time %f" % time)
 
 	if len(wave_collections) == 0:
 		wave_collections.append(ui_controller.get_wave_collection(time))
