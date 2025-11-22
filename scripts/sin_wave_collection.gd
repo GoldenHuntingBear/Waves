@@ -25,11 +25,16 @@ func add(collection: SinWaveCollection) -> void:
 	self.waves += new_collection.waves
 
 
-func function(time: float) -> float:
+func function(time: float, debug: bool = false) -> float:
 	var result = 0
+	var msg = ""
 
 	for wave in waves:
 		result += wave.function(time)
+		msg += "%f + " % (wave.amplitude * amplitude)
+
+	if debug:
+		print(msg)
 
 	return amplitude * result
 

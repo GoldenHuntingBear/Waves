@@ -96,7 +96,8 @@ func update_wave_collections(_min_freq: float):
 	var new_collection = SinWaveCollection.new(1, ui_controller.get_sin_waves(), time)
 
 	if len(wave_collections) == 2:
-		var new_first_collection = wave_collections[0].change_amplitude(1, time)
+		var first_wave_factor = augmenting_wave_factor(time, wave_collections[0].start_time)
+		var new_first_collection = wave_collections[0].change_amplitude(first_wave_factor, time)
 		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
 
 		if second_wave_factor > wave_factor_threshold:
