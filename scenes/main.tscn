@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://2f3axxmf3kj5"]
+[gd_scene load_steps=30 format=3 uid="uid://2f3axxmf3kj5"]
 
 [ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://errplgwyrdfm" path="res://scenes/radio.tscn" id="1_a8y0u"]
+[ext_resource type="Texture2D" uid="uid://g2aoi7q7gk7d" path="res://assets/hay_bales_4k.exr" id="1_jkv2x"]
 [ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://scripts/wave_controller.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://dn05votnfqpwh" path="res://scripts/future_wave.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://7xblgqh6jc0n" path="res://assets/screen_background.svg" id="1_ya4ey"]
@@ -14,6 +15,21 @@
 [ext_resource type="Shader" uid="uid://d0we7e3e7yx4a" path="res://shaders/screen_pixelation.gdshader" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://cbj6w55sh8vpc" path="res://scripts/reward_controller.gd" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://mlcuovhkie85" path="res://scenes/coin.tscn" id="13_trceg"]
+[ext_resource type="Material" uid="uid://yk0c5e2ncpwr" path="res://assets/blinds_mat.tres" id="16_jbj1t"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jbj1t"]
+panorama = ExtResource("1_jkv2x")
+energy_multiplier = 0.5
+
+[sub_resource type="Sky" id="Sky_muem4"]
+sky_material = SubResource("PanoramaSkyMaterial_jbj1t")
+
+[sub_resource type="Environment" id="Environment_dp3eg"]
+background_mode = 2
+sky = SubResource("Sky_muem4")
+sky_rotation = Vector3(0, 1.0559242, 0)
+tonemap_mode = 2
+glow_enabled = true
 
 [sub_resource type="Curve2D" id="Curve2D_sugp2"]
 
@@ -49,6 +65,15 @@ resource_local_to_scene = true
 size = Vector2(128, 72)
 
 [node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dp3eg")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.889526, 25.619247, 130.56747)
+size = Vector3(338.73706, 215.64456, 331.51624)
+interior = true
+enable_shadows = true
 
 [node name="radio" parent="." instance=ExtResource("1_a8y0u")]
 transform = Transform3D(-0.9152307, 0, -3.347126, 0, 3.4700005, 0, 3.347126, 0, -0.9152307, -69.020226, -13.389648, 14.389877)
@@ -125,7 +150,7 @@ mesh = SubResource("QuadMesh_jkv2x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.532349, 73.05267)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 534, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 292.54553, -622.4231)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -153,3 +178,58 @@ layout_mode = 2
 size_flags_horizontal = 3
 max_value = 3.0
 step = 0.01
+
+[node name="Blinds" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 96.15038, -38.506676)
+
+[node name="BlindsTexture" type="CSGBox3D" parent="Blinds"]
+size = Vector3(173.27063, 75.3123, 1)
+material = ExtResource("16_jbj1t")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Blinds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6412506, -36.402496, 0.060302734)
+size = Vector3(173.93643, 2.3291016, 2.3012695)
+
+[node name="Walls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3690414, 13.914429)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116.91046, 26.67717, -37.93343)
+size = Vector3(173.27063, 223.48764, 13.75)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.71527, 25.653656, -37.562824)
+size = Vector3(93.46118, 221.44061, 13.008789)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7004547, -24.038246, -37.679523)
+size = Vector3(173.27063, 122.05681, 13.2421875)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7004547, 115.10745, -37.650105)
+size = Vector3(173.27063, 45, 13.18335)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 190.86801, 26.67717, 121.74782)
+visible = false
+size = Vector3(317.90594, 223.48764, 1)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -130.20462, 26.67717, 121.74782)
+visible = false
+size = Vector3(317.90594, 223.48764, 1)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.526367, 26.67717, 275.13177)
+visible = false
+size = Vector3(317.90594, 223.48764, 1)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, -76.72765, 118.1194)
+visible = false
+size = Vector3(405.6161, 327.50836, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, 127.11814, 118.1194)
+visible = false
+size = Vector3(405.6161, 327.50836, 1)

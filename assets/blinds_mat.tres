@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://yk0c5e2ncpwr"]
+
+[ext_resource type="Texture2D" uid="uid://di3p7jot3nht7" path="res://assets/FabricPlainNaturalSheer009/FabricPlainNaturalSheer009_COL_2K.jpg" id="1_isbhh"]
+
+[resource]
+transparency = 1
+albedo_color = Color(0.45882353, 0.45882353, 0.45882353, 0.8)
+albedo_texture = ExtResource("1_isbhh")
