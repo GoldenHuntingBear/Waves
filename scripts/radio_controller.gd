@@ -47,9 +47,13 @@ func _process(_delta: float) -> void:
 			min_rotation = -130
 			max_rotation = 130
 
-		var new_rotation = (mouse_position.x - mouse_position_when_clicked.x) * 0.01 + starting_rotation
-		selected_selector.rotation.z = clamp(new_rotation, deg_to_rad(min_rotation), deg_to_rad(max_rotation))
-		updated.emit(get_sin_wave().frequency)
+		var new_tried_rotation = (mouse_position.x - mouse_position_when_clicked.x) * 0.01 + starting_rotation
+		var old_rotation = selected_selector.rotation.z
+		var new_rotation = clamp(new_tried_rotation, deg_to_rad(min_rotation), deg_to_rad(max_rotation))
+		selected_selector.rotation.z = new_rotation
+
+		if abs(new_rotation - old_rotation) > 0.01:
+			updated.emit(get_sin_wave().frequency)
 
 
 func _input(event):
