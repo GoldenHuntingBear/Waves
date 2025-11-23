@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7qr7up7qh0wa"]
+
+[ext_resource type="PackedScene" uid="uid://1d0iancb4ww8" path="res://assets/blinds_switch.blend" id="1_lp6eq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lp6eq"]
+size = Vector3(1.4175415, 1.2629395, 0.5209961)
+
+[node name="blinds_switch" instance=ExtResource("1_lp6eq")]
+
+[node name="Light" parent="." index="1"]
+visible = false
+
+[node name="Camera" parent="." index="2"]
+visible = false
+
+[node name="UpButton" type="Area3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UpButton" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006500244, -0.13146973, 0.23950195)
+shape = SubResource("BoxShape3D_lp6eq")
+
+[node name="DownButton" type="Area3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5399257, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DownButton" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006500244, -0.13146973, 0.23950195)
+shape = SubResource("BoxShape3D_lp6eq")

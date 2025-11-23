@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj2reyp601aqa"]
+
+[ext_resource type="Texture2D" uid="uid://4gbnrimhkfg" path="res://assets/heart.png" id="1_v30as"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ycbwg"]
+points = PackedVector2Array(0, -8, -1200, -15, -2400, -16, -3200, -9, -2400, 3, 0, 15, 2400, 3, 3200, -9, 2400, -16, 1000, -15)
+
+[node name="Heart" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(-0.005, 1)
+shape = SubResource("ConvexPolygonShape2D_ycbwg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15114027, 0.15114027)
+texture = ExtResource("1_v30as")

@@ -38,6 +38,7 @@ func active_wave_update(delta: float) -> void:
 		update_wave_collections(0)
 
 	active_wave.position.x -= speed*delta
+	#var num_points = round(speed / 10)
 	var value = x
 	var y = get_y(value)
 

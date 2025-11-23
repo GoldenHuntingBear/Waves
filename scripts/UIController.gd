@@ -4,6 +4,7 @@ class_name UIController
 @onready var h_slider: HSlider = $VBoxContainer/HSlider
 @onready var h_slider_2: HSlider = $VBoxContainer/HSlider2
 @onready var radio: RadioController = $"../radio"
+@onready var sun_control: Node3D = $"../SunControl"
 
 signal updated(min_freq)
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 	h_slider.value_changed.connect(send_update)
 	h_slider_2.value_changed.connect(send_update)
 	radio.updated.connect(send_update)
+	sun_control.updated.connect(send_update)
 
 
 func get_sin_waves() -> Array[SinWave]:
@@ -23,6 +25,9 @@ func get_sin_waves() -> Array[SinWave]:
 
 	if radio:
 		values.append(radio.get_sin_wave())
+
+	if sun_control:
+		values.append(sun_control.get_sin_wave())
 
 	return values
 

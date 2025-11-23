@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2swdnvgb0yd0"]
+
+[ext_resource type="PackedScene" uid="uid://yicxnttn7uc2" path="res://assets/window.blend" id="1_oya5r"]
+[ext_resource type="Shader" uid="uid://dxemxfais01m6" path="res://shaders/window.gdshader" id="2_to7fh"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_to7fh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qvkcj"]
+render_priority = 0
+shader = ExtResource("2_to7fh")
+shader_parameter/albedo = Color(1, 1, 1, 0)
+shader_parameter/roughness = 0.15
+shader_parameter/normal_strength = 1.0
+shader_parameter/edge_color = Color(0, 0, 0, 1)
+
+[node name="window" instance=ExtResource("1_oya5r")]
+
+[node name="Cube_001" parent="." index="1"]
+visible = false
+
+[node name="Cube_002" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(5.711789, 0, 0, 0, 5.6028733, 0, 0, 0, 0.047961928, 0, 0, 0)
+mesh = SubResource("QuadMesh_to7fh")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_qvkcj")
