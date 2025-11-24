@@ -3,22 +3,26 @@ class_name ObstacleController
 
 @export var obs_scene: PackedScene
 @onready var wave_controller: WaveController = $"../WaveController"
-@onready var timer: Timer = $Timer
 @onready var spawn_position_default: Node2D = $SpawnPositionDefault
 @onready var obs_parent: Node2D = $Obstacles
 
-const OBSTACLE_MIN_TIME: float = 100
-const OBSTACLE_MAX_TIME: float = 500
+const OBSTACLE_MIN_TIME: float = 200
+const OBSTACLE_MAX_TIME: float = 700
+
+var timer = 10000
 
 
 func _ready() -> void:
-	timer.timeout.connect(spawn_obs)
 	spawn_obs()
 
 
 func _process(delta: float) -> void:
 	move_obstacles(delta)
 	check_positions()
+	timer -= delta * wave_controller.speed
+
+	if timer < 0:
+		spawn_obs()
 
 
 func spawn_obs():
@@ -30,10 +34,7 @@ func spawn_obs():
 
 
 func reset_timer():
-	timer.wait_time = randf_range(OBSTACLE_MIN_TIME, OBSTACLE_MAX_TIME) / wave_controller.speed
-	#print(wave_controller.speed)
-	#print("reset timer %f" % timer.wait_time)
-	timer.start()
+	timer = randf_range(OBSTACLE_MIN_TIME, OBSTACLE_MAX_TIME) #/ wave_controller.speed
 
 
 func move_obstacles(delta: float):

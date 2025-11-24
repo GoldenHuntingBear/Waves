@@ -12,7 +12,7 @@ var in_area: bool = false
 
 const MAX_POSITION = 110
 const MIN_POSITION = 80
-const FREQUENCY = 10. / 1000
+const FREQUENCY = 5. / 1000
 
 signal updated(frequency)
 
@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 		if selected_button == up_button:
 			direction = 1
 
-		blinds.position.y = clamp(blinds.position.y + direction * delta * 10, MIN_POSITION, MAX_POSITION)
+		blinds.position.y = clamp(blinds.position.y + direction * delta * 20, MIN_POSITION, MAX_POSITION)
 		updated.emit(FREQUENCY)
 
 

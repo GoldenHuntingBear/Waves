@@ -92,7 +92,7 @@ func get_tangent(time: float) -> float:
 
 func update_wave_collections(_min_freq: float):
 	var time = x
-	print("updating wave collections with time %f" % time)
+	#print("updating wave collections with time %f" % time)
 
 	if len(wave_collections) == 0:
 		wave_collections.append(ui_controller.get_wave_collection(time))
@@ -146,13 +146,13 @@ func check_wave_collection() -> void:
 	var wave_factor = diminishing_wave_factor(time, wave_collections[0].start_time)
 
 	if wave_factor == 0.0:
-		print("deleting first wave collection")
+		#print("deleting first wave collection")
 		wave_collections.remove_at(0)
 		return
 
 	for wave in wave_collections[0].waves:
 		if wave_factor * wave.amplitude < wave_factor_threshold * 10:
-			print("removing a wave")
+			#print("removing a wave")
 			wave_collections[0].waves.erase(wave)
 
 		#print(wave_factor * wave.amplitude)

@@ -95,8 +95,8 @@ func end_selector_control(selector: Area3D):
 
 
 func get_sin_wave() -> SinWave:
-	var amplitude = change_max_min(rad_to_deg(volume_selector.rotation.z), -130, 130, 0, 100)
-	var frequency = change_max_min(rad_to_deg(main_selector.rotation.z), -90, 90, 1, 3) / 1000
+	var amplitude = change_max_min(rad_to_deg(volume_selector.rotation.z), -130, 130, 0, 200)
+	var frequency = change_max_min(rad_to_deg(main_selector.rotation.z), -90, 90, 0.5, 2) / 1000
 	#print(main_selector.rotation.z, " ", frequency)
 	return SinWave.new(amplitude, frequency)
 

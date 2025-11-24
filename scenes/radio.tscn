@@ -12,7 +12,7 @@ size = Vector3(1.6550293, 1.7293701, 1)
 script = ExtResource("2_ldjbc")
 
 [node name="Volume selector" parent="." index="2"]
-transform = Transform3D(0.016238391, 0.5584439, 0, -0.5584439, 0.016238391, 0, 0, 0, 0.7089451, -2.4398198, 1.4344835, -1.7890414)
+transform = Transform3D(0.5296873, 0.1776363, 0, -0.1776363, 0.5296873, 0, 0, 0, 0.7089451, -2.4398198, 1.4344835, -1.7890414)
 
 [node name="MainSelectorArea" type="Area3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8435068, 2.6170259, -2.0309858)

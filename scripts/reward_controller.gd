@@ -2,34 +2,37 @@ extends Node2D
 class_name RewardController
 
 @export var coin_scene: PackedScene
-@onready var timer: Timer = $Timer
 @onready var rewards_parent: Node2D = $Rewards
 @onready var wave_controller: WaveController = $"../WaveController"
 
-const REWARD_MIN_TIME: float = 3
-const REWARD_MAX_TIME: float = 4# 10
+const REWARD_MIN_TIME: float = 50
+const REWARD_MAX_TIME: float = 200
+
+var timer = 1000
 
 
 func _ready() -> void:
-	timer.timeout.connect(spawn_reward)
 	spawn_reward()
 
 
 func _process(delta: float) -> void:
 	move_rewards(delta)
 	check_positions()
+	timer -= delta * wave_controller.speed
+
+	if timer < 0:
+		spawn_reward()
 
 
 func spawn_reward():
 	var coin: Node2D = coin_scene.instantiate()
 	rewards_parent.add_child(coin)
-	coin.position.y = randf_range(-640 + 100, 640 - 100)
+	coin.position.y = randf_range(-640 + 150, 640 - 150)
 	reset_timer()
 
 
 func reset_timer():
-	timer.wait_time = randf_range(REWARD_MIN_TIME, REWARD_MAX_TIME)
-	timer.start()
+	timer = randf_range(REWARD_MIN_TIME, REWARD_MAX_TIME)
 
 
 func move_rewards(delta: float):

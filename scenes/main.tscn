@@ -111,9 +111,6 @@ script = ExtResource("1_o5qli")
 script = ExtResource("7_o6xl0")
 obs_scene = ExtResource("8_tipki")
 
-[node name="Timer" type="Timer" parent="SubViewport/ObstacleController"]
-one_shot = true
-
 [node name="SpawnPositionDefault" type="Node2D" parent="SubViewport/ObstacleController"]
 position = Vector2(1300, 360)
 
@@ -121,14 +118,11 @@ position = Vector2(1300, 360)
 
 [node name="Character" parent="SubViewport" instance=ExtResource("9_ya4ey")]
 position = Vector2(150, 360)
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.05, 0.05)
 
 [node name="RewardController" type="Node2D" parent="SubViewport"]
 script = ExtResource("12_eb6dy")
 coin_scene = ExtResource("13_trceg")
-
-[node name="Timer" type="Timer" parent="SubViewport/RewardController"]
-one_shot = true
 
 [node name="Rewards" type="Node2D" parent="SubViewport/RewardController"]
 position = Vector2(1300, 360)
@@ -214,7 +208,7 @@ script = ExtResource("18_gqmmt")
 transform = Transform3D(4.2989573, 0, 0, 0, 3.9321392, 0, 0, 0, 3.517714, -74.41091, 57.322777, -16.722366)
 
 [node name="Blinds" type="Node3D" parent="SunControl"]
-transform = Transform3D(0.636289, 0, 0, 0, 1, 0, 0, 0, 1, -8.732861, 96.15038, -16.186256)
+transform = Transform3D(0.636289, 0, 0, 0, 1, 0, 0, 0, 1, -8.733, 80, -16.186)
 
 [node name="BlindsTexture" type="CSGBox3D" parent="SunControl/Blinds"]
 material_override = ExtResource("16_jbj1t")
