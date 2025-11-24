@@ -4,5 +4,5 @@
 
 [resource]
 transparency = 1
-albedo_color = Color(0.45882353, 0.45882353, 0.45882353, 0.94509804)
+albedo_color = Color(0.45882353, 0.45882353, 0.45882353, 1)
 albedo_texture = ExtResource("1_isbhh")

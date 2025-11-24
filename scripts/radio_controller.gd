@@ -29,6 +29,10 @@ func _process(_delta: float) -> void:
 
 	if not in_area and not mouse_clicked:
 		selected_selector = null
+
+		if Input.get_current_cursor_shape() == Input.CURSOR_HSIZE:
+			Input.set_default_cursor_shape(Input.CURSOR_ARROW)
+
 		return
 
 	if not mouse_clicked:
@@ -67,6 +71,7 @@ func _input(event):
 
 func begin_selector_control(selector: Area3D):
 	#print("begin control %s" % selector)
+	Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
 	if selected_selector:
 		return
 
@@ -86,6 +91,7 @@ func end_selector_control(selector: Area3D):
 
 	if not mouse_clicked:
 		selected_selector = null
+		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 
 func get_sin_wave() -> SinWave:

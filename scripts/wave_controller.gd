@@ -38,13 +38,17 @@ func active_wave_update(delta: float) -> void:
 		update_wave_collections(0)
 
 	active_wave.position.x -= speed*delta
-	#var num_points = round(speed / 10)
-	var value = x
-	var y = get_y(value)
+	var num_points = round(speed / 10)
+	var step = delta*speed / num_points
 
-	active_wave.curve.add_point(Vector2(value, y))
+	for i in range(num_points):
+		var value = x + step * i
+		var y = get_y(value)
+		active_wave.curve.add_point(Vector2(value, y))
+
 	if active_wave.curve.point_count >= 500:
-		active_wave.curve.remove_point(0)
+		for i in range(200):
+			active_wave.curve.remove_point(i)
 
 	active_wave.queue_redraw()
 

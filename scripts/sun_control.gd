@@ -45,9 +45,8 @@ func _input(event):
 
 
 func begin_button_pressed(button: Area3D):
-	#print("begin control %s" % selector)
-	if selected_button:
-		return
+	#print("begin control %s" % button)
+	Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
 
 	in_area = true
 
@@ -58,6 +57,7 @@ func begin_button_pressed(button: Area3D):
 
 
 func end_button_pressed():
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 	in_area = false
 	selected_button = null
 

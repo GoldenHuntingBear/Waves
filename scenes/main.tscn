@@ -15,7 +15,7 @@
 [ext_resource type="Shader" uid="uid://d0we7e3e7yx4a" path="res://shaders/screen_pixelation.gdshader" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://cbj6w55sh8vpc" path="res://scripts/reward_controller.gd" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://mlcuovhkie85" path="res://scenes/coin.tscn" id="13_trceg"]
-[ext_resource type="Material" uid="uid://yk0c5e2ncpwr" path="res://assets/blinds_mat.tres" id="16_jbj1t"]
+[ext_resource type="Material" uid="uid://yk0c5e2ncpwr" path="res://materials/blinds_mat.tres" id="16_jbj1t"]
 [ext_resource type="Material" uid="uid://cxjw8qa73pe1m" path="res://materials/wall_mat.tres" id="17_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://c2swdnvgb0yd0" path="res://scenes/window.tscn" id="17_muem4"]
 [ext_resource type="PackedScene" uid="uid://b7qr7up7qh0wa" path="res://scenes/blinds_switch.tscn" id="18_0ld40"]
@@ -74,8 +74,8 @@ size = Vector2(128, 72)
 environment = SubResource("Environment_dp3eg")
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.889526, 25.619247, 130.56747)
-size = Vector3(338.73706, 215.64456, 331.51624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.889526, 25.619247, 121.86157)
+size = Vector3(338.73706, 215.64456, 348.92804)
 interior = true
 enable_shadows = true
 
@@ -150,38 +150,15 @@ mesh = SubResource("QuadMesh_eb6dy")
 material_override = SubResource("StandardMaterial3D_a8y0u")
 mesh = SubResource("QuadMesh_jkv2x")
 
+[node name="Control" type="Node3D" parent="."]
+script = ExtResource("2_0wfyh")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.532349, 73.05267)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 292.54553, -622.4231)
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("2_0wfyh")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-layout_mode = 0
-offset_right = 270.0
-offset_bottom = 40.0
-
-[node name="HSlider" type="HSlider" parent="Control/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 3.0
-step = 0.01
-
-[node name="HSlider2" type="HSlider" parent="Control/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 3.0
-step = 0.01
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 351.7426, -939.6114)
+shadow_enabled = true
 
 [node name="Walls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3690414, 13.914429)
@@ -208,32 +185,27 @@ size = Vector3(173.27063, 45, 13.18335)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 190.86801, 26.67717, 121.74782)
-visible = false
 size = Vector3(317.90594, 223.48764, 1)
 material = ExtResource("17_dp3eg")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -130.20462, 26.67717, 121.74782)
-visible = false
 size = Vector3(317.90594, 223.48764, 1)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.526367, 26.67717, 275.13177)
-visible = false
 size = Vector3(317.90594, 223.48764, 1)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, -76.72765, 118.1194)
-visible = false
 size = Vector3(405.6161, 327.50836, 1)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="Walls"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, 127.11814, 118.1194)
-visible = false
 size = Vector3(405.6161, 327.50836, 1)
 
 [node name="window" parent="." instance=ExtResource("17_muem4")]
-transform = Transform3D(13.460404, 0, 0, 0, 9.067476, 0, 0, 0, 4.5407686, -10.439056, 69.95315, -20.227503)
+transform = Transform3D(13.460404, 0, 0, 0, 9.364882, 0, 0, 0, 4.5407686, -10.439056, 69.683174, -20.227503)
 
 [node name="SunControl" type="Node3D" parent="."]
 script = ExtResource("18_gqmmt")
@@ -245,11 +217,21 @@ transform = Transform3D(4.2989573, 0, 0, 0, 3.9321392, 0, 0, 0, 3.517714, -74.41
 transform = Transform3D(0.636289, 0, 0, 0, 1, 0, 0, 0, 1, -8.732861, 96.15038, -16.186256)
 
 [node name="BlindsTexture" type="CSGBox3D" parent="SunControl/Blinds"]
+material_override = ExtResource("16_jbj1t")
+gi_mode = 2
 size = Vector3(173.27063, 75.3123, 1)
 material = ExtResource("16_jbj1t")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SunControl/Blinds"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6412506, -36.402496, 0.060302734)
+gi_mode = 2
 size = Vector3(173.93643, 2.3291016, 2.3012695)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0957413, 79.80734, 65.53519)
+light_energy = 10.0
+shadow_enabled = true
+omni_range = 663.285
+omni_attenuation = 0.588
 
 [editable path="SunControl/blinds_switch"]
