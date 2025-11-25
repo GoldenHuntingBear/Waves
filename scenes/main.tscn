@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://2f3axxmf3kj5"]
+[gd_scene load_steps=38 format=3 uid="uid://2f3axxmf3kj5"]
 
 [ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://errplgwyrdfm" path="res://scenes/radio.tscn" id="1_a8y0u"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://scripts/wave_controller.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://dn05votnfqpwh" path="res://scripts/future_wave.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://7xblgqh6jc0n" path="res://assets/screen_background.svg" id="1_ya4ey"]
-[ext_resource type="Script" uid="uid://0g1cq8xwpvgj" path="res://scripts/UIController.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://0g1cq8xwpvgj" path="res://scripts/InputController.gd" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://woowu6jigil" path="res://scripts/transition_wave.gd" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://dvocxdxd0w5r7" path="res://scripts/obstacle_controller.gd" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://codn6ehkemi1f" path="res://scenes/wall.tscn" id="8_tipki"]
@@ -68,6 +68,16 @@ albedo_texture = SubResource("ViewportTexture_trceg")
 [sub_resource type="QuadMesh" id="QuadMesh_jkv2x"]
 resource_local_to_scene = true
 size = Vector2(128, 72)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yc10j"]
+viewport_path = NodePath("UI")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jscy8"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_yc10j")
+
+[sub_resource type="QuadMesh" id="QuadMesh_pm3ni"]
+size = Vector2(30, 60)
 
 [node name="Main" type="Node3D"]
 
@@ -142,7 +152,7 @@ material = SubResource("ShaderMaterial_ya4ey")
 mesh = SubResource("QuadMesh_eb6dy")
 
 [node name="Screen" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, -15.496081, -7.213668, 22.135323)
+transform = Transform3D(0.885, 0, 0, 0, 0.885, 0, 0, 0, 0.885, -15.496081, -7.213668, 20.974995)
 material_override = SubResource("StandardMaterial3D_a8y0u")
 mesh = SubResource("QuadMesh_jkv2x")
 
@@ -234,5 +244,26 @@ omni_attenuation = 0.588
 
 [node name="waves_viewer_machine" parent="." instance=ExtResource("21_yc10j")]
 transform = Transform3D(-6.3299994, 0, 0.0015463659, 0, 6.33, 0, -0.0015463659, 0, -6.3299994, -15.55238, -3.7999535, 2.1643753)
+
+[node name="UI" type="SubViewport" parent="."]
+
+[node name="UIController" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Label" type="Label" parent="UI/UIController"]
+layout_mode = 0
+offset_right = 52.0
+offset_bottom = 23.0
+text = "Health"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.255936, -5.845276, 21.336388)
+material_override = SubResource("StandardMaterial3D_jscy8")
+mesh = SubResource("QuadMesh_pm3ni")
 
 [editable path="SunControl/blinds_switch"]

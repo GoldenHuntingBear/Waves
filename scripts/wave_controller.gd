@@ -5,7 +5,7 @@ class_name WaveController
 @onready var future_wave: Path2D = $FutureWave
 @onready var transition_wave: Path2D = $TransitionWave
 
-@onready var ui_controller: UIController = $"../../Control"
+@onready var ui_controller: InputController = $"../../Control"
 
 const START_SPEED = 10
 @export var speed: float = START_SPEED

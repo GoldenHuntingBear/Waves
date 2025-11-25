@@ -1,5 +1,5 @@
 extends Node3D
-class_name UIController
+class_name InputController
 
 @onready var radio: RadioController = $"../radio"
 @onready var sun_control: Node3D = $"../SunControl"
