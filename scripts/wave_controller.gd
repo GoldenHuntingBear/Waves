@@ -9,8 +9,8 @@ class_name WaveController
 
 const START_SPEED = 10
 @export var speed: float = START_SPEED
-@export var transition_time: float = 5
-@export var wave_factor_threshold = 0.01
+@export var transition_time: float = 10
+@export var wave_factor_threshold = 0.05
 
 var wave_collections: Array[SinWaveCollection] = []
 
@@ -43,7 +43,7 @@ func active_wave_update(delta: float) -> void:
 
 	for i in range(num_points):
 		var value = x + step * i
-		var y = get_y(value)
+		var y = get_y(value, true)
 		active_wave.curve.add_point(Vector2(value, y))
 
 	if active_wave.curve.point_count >= 500:
@@ -64,12 +64,12 @@ func get_y(time: float, debug: bool = false) -> float:
 	var first_collection = wave_collections[0]
 	var second_collection = wave_collections[1]
 
-	if debug:
-		if not diminishing_wave_factor(time, first_collection.start_time) == 0.0:
-			print(time, " ", diminishing_wave_factor(time, first_collection.start_time), " ", first_collection.start_time, " ", augmenting_wave_factor(time, second_collection.start_time))
-			pass
+	#if debug:
+		#if not diminishing_wave_factor(time, first_collection.start_time) == 0.0:
+			#print(time, " ", diminishing_wave_factor(time, first_collection.start_time), " ", first_collection.start_time, " ", augmenting_wave_factor(time, second_collection.start_time))
+			#pass
 
-	result += first_collection.function(time) * diminishing_wave_factor(time, first_collection.start_time)
+	result += first_collection.function(time, debug) * diminishing_wave_factor(time, first_collection.start_time)
 	result += second_collection.function(time) * augmenting_wave_factor(time, second_collection.start_time)
 	return result
 
@@ -104,6 +104,7 @@ func update_wave_collections(_min_freq: float):
 		var first_wave_factor = augmenting_wave_factor(time, wave_collections[0].start_time)
 		var new_first_collection = wave_collections[0].change_amplitude(first_wave_factor, time)
 		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
+		print(wave_collections[0].amplitude, " ",first_wave_factor, " ", new_first_collection.amplitude)
 
 		if second_wave_factor > wave_factor_threshold:
 			new_first_collection.add(wave_collections[1].change_amplitude(second_wave_factor, time))

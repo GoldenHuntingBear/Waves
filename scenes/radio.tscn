@@ -14,6 +14,9 @@ script = ExtResource("2_ldjbc")
 [node name="Volume selector" parent="." index="2"]
 transform = Transform3D(0.5296873, 0.1776363, 0, -0.1776363, 0.5296873, 0, 0, 0, 0.7089451, -2.4398198, 1.4344835, -1.7890414)
 
+[node name="Antena" parent="." index="3"]
+transform = Transform3D(0.09620984, 0.1263719, 0, -0.1263719, 0.09620984, 0, 0, 0, 0.15882756, -3.016691, 4.3028035, 1.7254152)
+
 [node name="MainSelectorArea" type="Area3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8435068, 2.6170259, -2.0309858)
 
