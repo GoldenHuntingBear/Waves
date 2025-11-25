@@ -41,9 +41,9 @@ func active_wave_update(delta: float) -> void:
 	var num_points = round(speed / 10)
 	var step = delta*speed / num_points
 
-	for i in range(num_points):
-		var value = x + step * i
-		var y = get_y(value, true)
+	for i in range(num_points-1, -1, -1):
+		var value = x - step * i
+		var y = get_y(value)
 		active_wave.curve.add_point(Vector2(value, y))
 
 	if active_wave.curve.point_count >= 500:
@@ -71,6 +71,7 @@ func get_y(time: float, debug: bool = false) -> float:
 
 	result += first_collection.function(time, debug) * diminishing_wave_factor(time, first_collection.start_time)
 	result += second_collection.function(time) * augmenting_wave_factor(time, second_collection.start_time)
+
 	return result
 
 
@@ -101,10 +102,10 @@ func update_wave_collections(_min_freq: float):
 	var new_collection = SinWaveCollection.new(1, ui_controller.get_sin_waves(), time)
 
 	if len(wave_collections) == 2:
-		var first_wave_factor = augmenting_wave_factor(time, wave_collections[0].start_time)
+		var first_wave_factor = diminishing_wave_factor(time, wave_collections[0].start_time)
 		var new_first_collection = wave_collections[0].change_amplitude(first_wave_factor, time)
 		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
-		print(wave_collections[0].amplitude, " ",first_wave_factor, " ", new_first_collection.amplitude)
+		#print(wave_collections[0].amplitude, " ",first_wave_factor, " ", new_first_collection.amplitude)
 
 		if second_wave_factor > wave_factor_threshold:
 			new_first_collection.add(wave_collections[1].change_amplitude(second_wave_factor, time))

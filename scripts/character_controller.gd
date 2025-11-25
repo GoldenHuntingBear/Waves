@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var wave_controller: WaveController = $"../WaveController"
+@onready var ui_controller: UIController = $"../../UI/UIController"
+
 var score: int = 0
 
 
@@ -18,7 +20,7 @@ func _physics_process(_delta: float) -> void:
 
 func take_damage():
 	print("taking damage")
-	pass
+	ui_controller.take_damage(1)
 
 
 func add_score(amount: int):

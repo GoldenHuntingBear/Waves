@@ -36,6 +36,7 @@ func _process(_delta: float) -> void:
 		return
 
 	if not mouse_clicked:
+		starting_rotation = selected_selector.rotation.z
 		return
 
 	if selected_selector and not mouse_position_when_clicked:
