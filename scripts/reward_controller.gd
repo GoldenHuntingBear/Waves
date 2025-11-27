@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 func spawn_reward():
 	var coin: Node2D = coin_scene.instantiate()
 	rewards_parent.add_child(coin)
-	coin.position.y = randf_range(-640 + 150, 640 - 150)
+	coin.position.y = randf_range(-250, 250)
 	reset_timer()
 
 

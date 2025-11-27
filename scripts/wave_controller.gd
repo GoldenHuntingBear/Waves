@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	active_wave_update(delta)
 	setup_future_wave(0.1)
 	check_wave_collection()
-	speed += delta * 10
+	speed += delta * 1.5
 
 
 func active_wave_update(delta: float) -> void:
@@ -147,13 +147,13 @@ func check_wave_collection() -> void:
 
 	var wave_factor = diminishing_wave_factor(time, wave_collections[0].start_time)
 
-	if wave_factor == 0.0:
+	if wave_factor < wave_factor_threshold:
 		#print("deleting first wave collection")
 		wave_collections.remove_at(0)
 		return
 
 	for wave in wave_collections[0].waves:
-		if wave_factor * wave.amplitude < wave_factor_threshold * 10:
+		if wave_factor * wave.amplitude < wave_factor_threshold:
 			#print("removing a wave")
 			wave_collections[0].waves.erase(wave)
 

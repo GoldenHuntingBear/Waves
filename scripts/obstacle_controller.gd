@@ -6,8 +6,8 @@ class_name ObstacleController
 @onready var spawn_position_default: Node2D = $SpawnPositionDefault
 @onready var obs_parent: Node2D = $Obstacles
 
-const OBSTACLE_MIN_TIME: float = 200
-const OBSTACLE_MAX_TIME: float = 700
+const OBSTACLE_MIN_TIME: float = 400
+const OBSTACLE_MAX_TIME: float = 900
 
 var timer = 10000
 

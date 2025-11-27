@@ -347,6 +347,7 @@ transparent_bg = true
 size = Vector2i(512, 957)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+visible = false
 
 [node name="ScreenEffect" type="MeshInstance2D" parent="UI/CanvasLayer"]
 material = SubResource("ShaderMaterial_choun")

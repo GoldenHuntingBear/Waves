@@ -17,7 +17,7 @@ func check_collision(body: Node2D):
 
 func size_and_position_setup():
 	var previous_size = collision_shape_2d.scale.y * 225
-	var size = randf_range(0.2, 0.7) * screen_size.y / previous_size
+	var size = randf_range(0.2, 0.6) * screen_size.y / previous_size
 	scale.y *= size
 	var place = ["top", "bottom"].pick_random()
 

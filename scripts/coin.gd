@@ -11,7 +11,6 @@ func _ready() -> void:
 
 func check_collision(body: Node2D):
 	if body.name == "Character":
-		print("character collision")
 		body.add_score(1)
 		queue_free()
 		return
