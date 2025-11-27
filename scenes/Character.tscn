@@ -22,7 +22,7 @@ height = 718.0
 script = ExtResource("1_q6urs")
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
-position = Vector2(0, -354)
+position = Vector2(0, -336)
 
 [node name="BottomBack" type="Bone2D" parent="Skeleton2D"]
 position = Vector2(0, -16)
@@ -30,10 +30,12 @@ rest = Transform2D(1, 0, 0, 1, 0, -16)
 
 [node name="TopLeftLeg" type="Bone2D" parent="Skeleton2D/BottomBack"]
 position = Vector2(0, 119)
+rotation = 0.3339491
 rest = Transform2D(1, 0, 0, 1, 0, 119)
 
 [node name="BottomLeftLeg" type="Bone2D" parent="Skeleton2D/BottomBack/TopLeftLeg"]
 position = Vector2(-72, 122)
+rotation = -0.61002564
 rest = Transform2D(1, 0, 0, 1, -72, 122)
 
 [node name="BottomLeftLeg" type="Sprite2D" parent="Skeleton2D/BottomBack/TopLeftLeg/BottomLeftLeg"]
@@ -46,10 +48,12 @@ texture = ExtResource("10_smtlo")
 
 [node name="TopRightLeg" type="Bone2D" parent="Skeleton2D/BottomBack"]
 position = Vector2(0, 119)
+rotation = -0.3339491
 rest = Transform2D(1, 0, 0, 1, 0, 119)
 
 [node name="BottomRightLeg" type="Bone2D" parent="Skeleton2D/BottomBack/TopRightLeg"]
 position = Vector2(72, 122)
+rotation = 0.46651375
 rest = Transform2D(1, 0, 0, 1, 72, 122)
 
 [node name="BottomRightLeg" type="Sprite2D" parent="Skeleton2D/BottomBack/TopRightLeg/BottomRightLeg"]

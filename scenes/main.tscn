@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://2f3axxmf3kj5"]
+[gd_scene load_steps=53 format=3 uid="uid://2f3axxmf3kj5"]
 
 [ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://errplgwyrdfm" path="res://scenes/radio.tscn" id="1_a8y0u"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://b7qwt42xflb5q" path="res://assets/waves_viewer_machine.blend" id="21_yc10j"]
 [ext_resource type="Script" uid="uid://dg5r86gdstsrj" path="res://scenes/ui_controller.gd" id="22_jscy8"]
 [ext_resource type="Texture2D" uid="uid://4gbnrimhkfg" path="res://assets/heart.png" id="23_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://dlji36eqg5e4j" path="res://assets/coin_spritesheet.png" id="24_y6deb"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jbj1t"]
 panorama = ExtResource("1_jkv2x")
@@ -71,11 +72,105 @@ albedo_texture = SubResource("ViewportTexture_trceg")
 resource_local_to_scene = true
 size = Vector2(128, 72)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pm3ni"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og1vs"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wyq8"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxglm"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f3dj"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq6so"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv21b"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tel4y"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkpxi"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q0nq"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgi5k"]
+atlas = ExtResource("24_y6deb")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j8jky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og1vs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wyq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxglm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f3dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq6so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv21b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tel4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkpxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q0nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgi5k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_yc10j"]
 viewport_path = NodePath("UI")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jscy8"]
 resource_local_to_scene = true
+transparency = 1
 albedo_texture = SubResource("ViewportTexture_yc10j")
 
 [sub_resource type="QuadMesh" id="QuadMesh_pm3ni"]
@@ -131,7 +226,7 @@ position = Vector2(1300, 360)
 
 [node name="Character" parent="SubViewport" instance=ExtResource("9_ya4ey")]
 position = Vector2(150, 360)
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.08, 0.08)
 
 [node name="RewardController" type="Node2D" parent="SubViewport"]
 script = ExtResource("12_eb6dy")
@@ -248,7 +343,21 @@ omni_attenuation = 0.588
 transform = Transform3D(-6.3299994, 0, 0.0015463659, 0, 6.33, 0, -0.0015463659, 0, -6.3299994, -15.55238, -3.7999535, 2.1643753)
 
 [node name="UI" type="SubViewport" parent="."]
-size = Vector2i(512, 967)
+transparent_bg = true
+size = Vector2i(512, 957)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="ScreenEffect" type="MeshInstance2D" parent="UI/CanvasLayer"]
+material = SubResource("ShaderMaterial_choun")
+mesh = SubResource("QuadMesh_tipki")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="UI/CanvasLayer"]
+copy_mode = 2
+
+[node name="ScreenPixelation" type="MeshInstance2D" parent="UI/CanvasLayer"]
+material = SubResource("ShaderMaterial_ya4ey")
+mesh = SubResource("QuadMesh_eb6dy")
 
 [node name="UIController" type="Control" parent="UI"]
 layout_mode = 3
@@ -262,18 +371,70 @@ size_flags_vertical = 3
 script = ExtResource("22_jscy8")
 heart_sprite = ExtResource("23_pm3ni")
 
-[node name="HeartsContainer" type="HBoxContainer" parent="UI/UIController"]
+[node name="Panel" type="Panel" parent="UI/UIController"]
 layout_mode = 1
-offset_right = 256.0
-offset_bottom = 256.0
-scale = Vector2(0.63, 0.63)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_bottom = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pm3ni")
 
-[node name="TextureRect" type="TextureRect" parent="UI/UIController/HeartsContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/UIController/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/UIController/Panel/MarginContainer"]
 layout_mode = 2
+
+[node name="HeartsContainer" type="HBoxContainer" parent="UI/UIController/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HeartsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
 texture = ExtResource("23_pm3ni")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HeartsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("23_pm3ni")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HeartsContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("23_pm3ni")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIController/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+position = Vector2(80, 88)
+scale = Vector2(2.927074, 2.7495437)
+sprite_frames = SubResource("SpriteFrames_j8jky")
+autoplay = "default"
+
+[node name="Score" type="Label" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 121
+text = "0"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.255936, -5.845276, 21.336388)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.255936, -5.3187656, 21.050362)
 material_override = SubResource("StandardMaterial3D_jscy8")
 mesh = SubResource("QuadMesh_pm3ni")
 

@@ -73,10 +73,10 @@ func _input(event):
 func begin_selector_control(selector: Area3D):
 	#print("begin control %s" % selector)
 	Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
+	in_area = true
+
 	if selected_selector:
 		return
-
-	in_area = true
 
 	if selector == main_selector_area:
 		selected_selector = main_selector

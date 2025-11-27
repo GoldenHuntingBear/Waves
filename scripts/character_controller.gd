@@ -26,3 +26,4 @@ func take_damage():
 func add_score(amount: int):
 	score += amount
 	print("New score: %d" % score)
+	ui_controller.update_score(score)

@@ -24,3 +24,7 @@ window/stretch/mode="viewport"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SimpleFormatOnSave/plugin.cfg")
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
