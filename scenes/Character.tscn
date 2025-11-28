@@ -15,8 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://plxgsdy16gxa" path="res://assets/TopRightLeg.svg" id="12_6q5bf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkiy7"]
-radius = 153.0
-height = 718.0
+radius = 134.0
+height = 664.0
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_q6urs")
