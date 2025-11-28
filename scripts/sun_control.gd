@@ -34,8 +34,11 @@ func _process(delta: float) -> void:
 		if selected_button == up_button:
 			direction = 1
 
+		var old_y = blinds.position.y
 		blinds.position.y = clamp(blinds.position.y + direction * delta * 20, MIN_POSITION, MAX_POSITION)
-		updated.emit(FREQUENCY)
+
+		if blinds.position.y != old_y:
+			updated.emit(FREQUENCY)
 
 
 func _input(event):

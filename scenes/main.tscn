@@ -395,6 +395,7 @@ theme_override_constants/margin_bottom = 40
 layout_mode = 2
 
 [node name="HeartsContainer" type="HBoxContainer" parent="UI/UIController/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 
@@ -419,17 +420,28 @@ size_flags_horizontal = 0
 texture = ExtResource("23_pm3ni")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/UIController/Panel/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="UI/UIController/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-position = Vector2(80, 88)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/Control"]
+position = Vector2(66, 79.99999)
 scale = Vector2(2.927074, 2.7495437)
 sprite_frames = SubResource("SpriteFrames_j8jky")
 autoplay = "default"
 
-[node name="Score" type="Label" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
+[node name="Score" type="Label" parent="UI/UIController/Panel/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -4.0
+offset_right = -7.0
+offset_bottom = 164.89583
+grow_horizontal = 0
+grow_vertical = 2
 size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 121
 text = "0"
@@ -438,5 +450,55 @@ text = "0"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.255936, -5.3187656, 21.050362)
 material_override = SubResource("StandardMaterial3D_jscy8")
 mesh = SubResource("QuadMesh_pm3ni")
+
+[node name="EndScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EndScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EndScreen/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 58
+text = "Game Over"
+
+[node name="Label2" type="Label" parent="EndScreen/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Score: 100"
+
+[node name="Control" type="Control" parent="EndScreen/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0.25, 100)
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="EndScreen/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Restart"
 
 [editable path="SunControl/blinds_switch"]

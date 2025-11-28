@@ -34,6 +34,7 @@ func function(time: float, debug: bool = false) -> float:
 		msg += "%f + " % (wave.amplitude * amplitude)
 
 	if debug:
+		#print(len(waves))
 		print(msg)
 
 	return amplitude * result

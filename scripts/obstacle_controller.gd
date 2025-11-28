@@ -17,6 +17,9 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	if not wave_controller.running:
+		return
+
 	move_obstacles(delta)
 	check_positions()
 	timer -= delta * wave_controller.speed
