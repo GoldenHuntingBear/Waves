@@ -175,11 +175,14 @@ func check_wave_collection() -> void:
 
 func setup_future_wave(min_freq: float) -> void:
 	future_wave.curve.clear_points()
+	var size = 1000.
+	var num_points = 200
+	var step = size / num_points
 
-	for t in range(2000):
-		var future_x = t + x + transition_time * START_SPEED
+	for t in range(num_points):
+		var future_x = t * step + x + transition_time * START_SPEED
 		var new_point = Vector2(
-			t,
+			t*step,
 			input_controller.get_wave_collection(future_x).function(future_x)
 		)
 		future_wave.curve.add_point(new_point)
@@ -187,16 +190,21 @@ func setup_future_wave(min_freq: float) -> void:
 	future_wave.queue_redraw()
 
 
-func setup_transition_wave(delta: float) -> void:
+func setup_transition_wave(_delta: float) -> void:
 	transition_wave.curve.clear_points()
 	var time = x
-	var value = 0
+	const num_points = 20
+	var step = transition_time * START_SPEED / num_points
 	#print("transition starts at %f" % (value))
 
-	while value <= transition_time * START_SPEED:
-		var new_point = Vector2(value, get_y(value + time))
+	for n in range(num_points):
+		var transition_x = step * n
+		var new_point = Vector2(transition_x, get_y(transition_x + time))
 		transition_wave.curve.add_point(new_point)
-		value += delta
+
+	var last_transition_x = transition_time * START_SPEED
+	var last_point = Vector2(last_transition_x, get_y(last_transition_x + time))
+	transition_wave.curve.add_point(last_point)
 
 	transition_wave.queue_redraw()
 
