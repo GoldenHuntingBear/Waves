@@ -3,15 +3,18 @@ class_name UIController
 
 @export var heart_sprite: CompressedTexture2D
 @onready var hearts_container: HBoxContainer = $Panel/MarginContainer/VBoxContainer/HeartsContainer
-@onready var score: Label = $Panel/MarginContainer/VBoxContainer/Control/Score
+@onready var score_label: Label = $Panel/MarginContainer/VBoxContainer/Control/Score
 @onready var end_screen: Control = $"../../EndScreen"
 @onready var wave_controller: WaveController = $"../../SubViewport/WaveController"
 @onready var restart_button: Button = $"../../EndScreen/Panel/VBoxContainer/RestartButton"
+@onready var score_end_screen: Label = $"../../EndScreen/Panel/VBoxContainer/Label2"
 
+var score = 0
 var health = 3
 
 
 func _ready() -> void:
+	score = 0
 	restart_button.pressed.connect(restart_game)
 	update_health_display()
 
@@ -23,6 +26,7 @@ func take_damage(amount: int):
 	if health <= 0:
 		end_screen.visible = true
 		wave_controller.running = false
+		score_end_screen.text = "Score: %d" % score
 		return
 
 
@@ -39,8 +43,9 @@ func update_health_display():
 
 
 func update_score(score_amount: int):
-	score.text = str(score_amount)
-	score.position.x = 231
+	score = score_amount
+	score_label.text = str(score_amount)
+	#score_label.position.x = 231
 
 
 func restart_game():
