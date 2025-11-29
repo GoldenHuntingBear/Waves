@@ -51,11 +51,11 @@ func active_wave_update(delta: float) -> void:
 
 	for i in range(num_points-1, -1, -1):
 		var value = x - step * i
-		var last_value = active_wave.curve.get_point_position(active_wave.curve.point_count-1).y
 		var y = get_y(value)
 
-		if abs(last_value - y) > 20:
-			print(last_value, " ", y)
+		#var last_value = active_wave.curve.get_point_position(active_wave.curve.point_count-1).y
+		#if abs(last_value - y) > 20:
+			#print(last_value, " ", y)
 
 		active_wave.curve.add_point(Vector2(value, y))
 
@@ -82,8 +82,8 @@ func get_y(time: float, debug: bool = false) -> float:
 			#print(time, " ", diminishing_wave_factor(time, first_collection.start_time), " ", first_collection.start_time, " ", augmenting_wave_factor(time, second_collection.start_time))
 			#pass
 
-	result += first_collection.function(time, debug) * diminishing_wave_factor(time, first_collection.start_time)
-	result += second_collection.function(time) * augmenting_wave_factor(time, second_collection.start_time)
+	result += first_collection.function(time, -1, debug)
+	result += second_collection.function(time, 1)
 
 	return result
 
@@ -96,11 +96,8 @@ func get_tangent(time: float) -> float:
 		return wave_collections[0].tangent(time)
 
 	var result = 0
-	var first_collection = wave_collections[0]
-	var second_collection = wave_collections[1]
-
-	result += first_collection.tangent(time) * diminishing_wave_factor(time, first_collection.start_time)
-	result += second_collection.tangent(time) * augmenting_wave_factor(time, second_collection.start_time)
+	result += wave_collections[0].tangent(time, -1)
+	result += wave_collections[1].tangent(time, 1)
 	return result
 
 
@@ -116,61 +113,28 @@ func update_wave_collections(_min_freq: float):
 
 	if len(wave_collections) == 2:
 		#print("updating wave collections with time %f" % time)
-		var first_wave_factor = diminishing_wave_factor(time, wave_collections[0].start_time)
-		var new_first_collection = wave_collections[0].change_amplitude(first_wave_factor, time)
-		var second_wave_factor = augmenting_wave_factor(time, wave_collections[1].start_time)
 		#print(wave_collections[0].amplitude, " ",first_wave_factor, " ", new_first_collection.amplitude)
 
 		#if second_wave_factor > wave_factor_threshold:
-		new_first_collection.add(wave_collections[1].change_amplitude(second_wave_factor, time))
+		wave_collections[1].switch_to_diminishing(time)
+		wave_collections[0].add(wave_collections[1])
 
-		wave_collections[0] = new_first_collection
 		wave_collections[1] = new_collection
 	else:
-		wave_collections[0].start_time = time
+		wave_collections[0].change_start_times(time)
+		new_collection.change_start_times(time)
 		wave_collections.append(new_collection)
-
-
-func diminishing_wave_factor(time: float, start_time: float) -> float:
-	if time < start_time:
-		return 1
-
-	var transition = transition_time * START_SPEED
-	var value = time/transition - start_time/transition
-
-	return max(-value + 1, 0)
-	#return cos(PI/2 * min(value, 1))
-
-
-func augmenting_wave_factor(time: float, start_time: float) -> float:
-	if time < start_time:
-		return 0
-
-	var transition = transition_time * START_SPEED
-	var value = time/transition - start_time/transition
-
-	return min(value, 1)
-	#return sin(PI/2 * min(value, 1))
 
 
 func check_wave_collection() -> void:
 	var time = x
-	var wave_factor = diminishing_wave_factor(time, wave_collections[0].start_time)
 
 	if len(wave_collections) < 2:
 		return
 
-	if wave_factor < wave_factor_threshold:
-		#print("deleting first wave collection")
+	wave_collections[0].check_delete_waves(time-200)
+	if len(wave_collections[0].waves) == 0:
 		wave_collections.remove_at(0)
-		return
-
-	for wave in wave_collections[0].waves:
-		if wave_factor * wave.amplitude * wave_collections[0].amplitude < 2: # wave_factor_threshold
-			#print("removing a wave")
-			wave_collections[0].waves.erase(wave)
-
-		#print(wave_factor * wave.amplitude)
 
 
 func setup_future_wave(min_freq: float) -> void:
@@ -205,31 +169,6 @@ func setup_transition_wave(_delta: float) -> void:
 	var last_transition_x = transition_time * START_SPEED
 	var last_point = Vector2(last_transition_x, get_y(last_transition_x + time))
 	transition_wave.curve.add_point(last_point)
-
-	transition_wave.queue_redraw()
-
-
-func transition_wave_splines():
-	transition_wave.curve.clear_points()
-
-	if len(wave_collections) == 0:
-		return
-
-	var second_collection
-	if len(wave_collections) == 1:
-		second_collection = wave_collections[0]
-	else:
-		second_collection = wave_collections[1]
-
-	var y = get_y(x)
-	var first_point = Vector2(0, y)
-	var first_spline = get_spline(x, y, wave_collections[0], 30)
-	transition_wave.curve.add_point(first_point, -first_spline, first_spline)
-
-	var new_x = x + transition_time * speed
-	var second_point = Vector2(new_x-x, second_collection.function(new_x))
-	var second_spline = get_spline(new_x, second_collection.function(new_x), second_collection, 30)
-	transition_wave.curve.add_point(second_point, -second_spline, second_spline)
 
 	transition_wave.queue_redraw()
 

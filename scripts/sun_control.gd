@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 			direction = 1
 
 		var old_y = blinds.position.y
-		blinds.position.y = clamp(blinds.position.y + direction * delta * 20, MIN_POSITION, MAX_POSITION)
+		blinds.position.y = clamp(blinds.position.y + direction * delta * 40, MIN_POSITION, MAX_POSITION)
 
 		if blinds.position.y != old_y:
 			updated.emit(FREQUENCY)
