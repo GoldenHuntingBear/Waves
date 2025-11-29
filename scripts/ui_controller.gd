@@ -8,6 +8,9 @@ class_name UIController
 @onready var wave_controller: WaveController = $"../../SubViewport/WaveController"
 @onready var restart_button: Button = $"../../EndScreen/Panel/VBoxContainer/RestartButton"
 @onready var score_end_screen: Label = $"../../EndScreen/Panel/VBoxContainer/Label2"
+@onready var pause_screen: Control = $"../../PauseScreen"
+@onready var continue_button: Button = $"../../PauseScreen/Panel/VBoxContainer/ContinueButton"
+@onready var pause_button: Button = $"../../PauseButton"
 
 var score = 0
 var health = 3
@@ -16,6 +19,8 @@ var health = 3
 func _ready() -> void:
 	score = 0
 	restart_button.pressed.connect(restart_game)
+	pause_button.pressed.connect(pause_game)
+	continue_button.pressed.connect(continue_game)
 	update_health_display()
 
 
@@ -50,3 +55,13 @@ func update_score(score_amount: int):
 
 func restart_game():
 	get_tree().reload_current_scene()
+
+
+func continue_game():
+	pause_screen.visible = false
+	wave_controller.running = true
+
+
+func pause_game():
+	pause_screen.visible = true
+	wave_controller.running = false
