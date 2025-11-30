@@ -68,3 +68,7 @@ func augmenting_wave_factor(time: float) -> float:
 
 	return min(value, 1)
 	#return sin(PI/2 * min(value, 1))
+
+
+func to_str():
+	return "SinWave(a:%f, f:%f)" % [amplitude, frequency]

@@ -69,3 +69,12 @@ func check_delete_waves(time: float):
 			pass
 
 	waves = new_waves
+
+
+func to_str():
+	var msg = ""
+
+	for wave in waves:
+		msg += wave.to_str() + " + "
+
+	return "%f * (%s)" % [amplitude, msg]
