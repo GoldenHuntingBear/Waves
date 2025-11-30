@@ -35,7 +35,7 @@ func tangent(time: float, slope: int = 0) -> float:
 	#var temp = PI/2 + 2*PI*self.frequency*time
 	#var dividor = floor(temp / (2*PI))
 	#return - temp + dividor * 2 * PI + PI
-	var main_value = 2*PI*self.amplitude*self.frequency*cos(2*PI*self.frequency*time)
+	var main_value = 2*self.amplitude*self.frequency*cos(2*PI*self.frequency*time)
 
 	if slope == 0:
 		return main_value
@@ -56,7 +56,6 @@ func diminishing_wave_factor(time: float) -> float:
 	var value = time/transition - start_time/transition
 
 	return max(1-value, 0)
-	#return cos(PI/2 * min(value, 1))
 
 
 func augmenting_wave_factor(time: float) -> float:
@@ -67,7 +66,6 @@ func augmenting_wave_factor(time: float) -> float:
 	var value = time/transition - start_time/transition
 
 	return min(value, 1)
-	#return sin(PI/2 * min(value, 1))
 
 
 func to_str():

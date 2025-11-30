@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtdsgo5copu4j"]
+[gd_scene load_steps=16 format=3 uid="uid://dtdsgo5copu4j"]
 
 [ext_resource type="Texture2D" uid="uid://brliwhjkrkjnl" path="res://assets/BottomRightLeg.svg" id="1_53v7d"]
 [ext_resource type="Texture2D" uid="uid://jgekqbgidwk3" path="res://assets/BottomBack.svg" id="1_pry4r"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c1r8fca3s122k" path="res://assets/TopLeftLeg.svg" id="10_smtlo"]
 [ext_resource type="Texture2D" uid="uid://ckcj6amusgf0l" path="res://assets/TopRightArm.svg" id="11_356g5"]
 [ext_resource type="Texture2D" uid="uid://plxgsdy16gxa" path="res://assets/TopRightLeg.svg" id="12_6q5bf"]
+[ext_resource type="Texture2D" uid="uid://bvi225tl5707n" path="res://assets/surf board.svg" id="14_ftwfq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lkiy7"]
 radius = 134.0
@@ -127,3 +128,8 @@ texture = ExtResource("11_356g5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -344)
 shape = SubResource("CapsuleShape2D_lkiy7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(64, 17)
+scale = Vector2(0.9750003, 1.135)
+texture = ExtResource("14_ftwfq")
