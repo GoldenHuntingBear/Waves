@@ -34,9 +34,9 @@ func _process(delta: float) -> void:
 		return
 
 	x += delta * speed
-	setup_transition_wave(delta)
 	active_wave_update(delta)
 	setup_future_wave(0.1)
+	setup_transition_wave(delta)
 	check_wave_collection()
 	speed += delta * 1.5
 
@@ -71,6 +71,7 @@ func get_y(time: float, debug: bool = false) -> float:
 		return 0
 
 	if len(wave_collections) < 2:
+		#print("only one wave")
 		return wave_collections[0].function(time)
 
 	var result = 0
@@ -145,10 +146,7 @@ func setup_future_wave(min_freq: float) -> void:
 
 	for t in range(num_points):
 		var future_x = t * step + x + transition_time * START_SPEED
-		var new_point = Vector2(
-			t*step,
-			input_controller.get_wave_collection(future_x).function(future_x)
-		)
+		var new_point = Vector2(t*step, input_controller.get_wave_collection(future_x).function(future_x))
 		future_wave.curve.add_point(new_point)
 
 	future_wave.queue_redraw()
@@ -167,7 +165,7 @@ func setup_transition_wave(_delta: float) -> void:
 		transition_wave.curve.add_point(new_point)
 
 	var last_transition_x = transition_time * START_SPEED
-	var last_point = Vector2(last_transition_x, get_y(last_transition_x + time))
+	var last_point = Vector2(last_transition_x, future_wave.curve.get_point_position(0).y)
 	transition_wave.curve.add_point(last_point)
 
 	transition_wave.queue_redraw()

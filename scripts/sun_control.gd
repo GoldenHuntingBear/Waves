@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 		blinds.position.y = clamp(blinds.position.y + direction * delta * 40, MIN_POSITION, MAX_POSITION)
 
 		if blinds.position.y != old_y:
+			#print("update sun control")
 			updated.emit(FREQUENCY)
 
 

@@ -25,9 +25,13 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if not selected_selector:
+		return
+
 	mouse_position = get_viewport().get_mouse_position()
 
 	if not in_area and not mouse_clicked:
+		print("mouse not in area and not clicked (in process), resetting selector")
 		selected_selector = null
 
 		if Input.get_current_cursor_shape() == Input.CURSOR_HSIZE:
@@ -76,6 +80,7 @@ func begin_selector_control(selector: Area3D):
 	in_area = true
 
 	if selected_selector:
+		print("already selector, not changing")
 		return
 
 	if selector == main_selector_area:
@@ -91,6 +96,7 @@ func end_selector_control(selector: Area3D):
 	in_area = false
 
 	if not mouse_clicked:
+		print("mouse not in area and not clicked (in end_selector_control), resetting selector")
 		selected_selector = null
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 

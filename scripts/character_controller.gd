@@ -10,12 +10,12 @@ func _physics_process(_delta: float) -> void:
 	var new_y = 360.0 + wave_controller.get_y(wave_controller.x)
 	position.y = new_y
 
-	if len(wave_controller.wave_collections) < 1:
-		return
-
-	var center = Vector2(wave_controller.x, wave_controller.get_y(wave_controller.x))
-	var spline = wave_controller.get_spline(center.x, center.y, wave_controller.wave_collections[0], 20)
-	rotation = -(spline + center).angle_to(center)
+	#if len(wave_controller.wave_collections) < 1:
+		#return
+#
+	#var center = Vector2(wave_controller.x, wave_controller.get_y(wave_controller.x))
+	#var spline = wave_controller.get_spline(center.x, center.y, wave_controller.wave_collections[0], 20)
+	#rotation = -(spline + center).angle_to(center)
 
 
 func take_damage():
