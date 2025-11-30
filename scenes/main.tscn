@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://scripts/wave_controller.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://dn05votnfqpwh" path="res://scripts/future_wave.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://7xblgqh6jc0n" path="res://assets/screen_background.svg" id="1_ya4ey"]
-[ext_resource type="Script" uid="uid://0g1cq8xwpvgj" path="res://scripts/InputController.gd" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://0g1cq8xwpvgj" path="res://scripts/input_controller.gd" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://woowu6jigil" path="res://scripts/transition_wave.gd" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://dvocxdxd0w5r7" path="res://scripts/obstacle_controller.gd" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://codn6ehkemi1f" path="res://scenes/wall.tscn" id="8_tipki"]

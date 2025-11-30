@@ -14,7 +14,7 @@ const MAX_POSITION = 110
 const MIN_POSITION = 80
 const FREQUENCY = 5. / 1000
 
-signal updated(frequency)
+signal updated
 
 
 func _ready() -> void:
@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 
 		if blinds.position.y != old_y:
 			#print("update sun control")
-			updated.emit(FREQUENCY)
+			updated.emit()
 
 
 func _input(event):

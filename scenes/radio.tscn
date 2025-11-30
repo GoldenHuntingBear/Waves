@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://errplgwyrdfm"]
+[gd_scene load_steps=6 format=3 uid="uid://errplgwyrdfm"]
 
 [ext_resource type="PackedScene" uid="uid://ivkqvslphc3f" path="res://assets/radio.blend" id="1_y83x7"]
 [ext_resource type="Script" uid="uid://d11in0r1kggd8" path="res://scripts/radio_controller.gd" id="2_ldjbc"]
+[ext_resource type="Script" uid="uid://bqvp2hsgips0q" path="res://scripts/rotation_selector.gd" id="3_7h80l"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y83x7"]
 size = Vector3(1.6550293, 1.7293701, 1)
@@ -17,15 +18,25 @@ transform = Transform3D(0.5296873, 0.1776363, 0, -0.1776363, 0.5296873, 0, 0, 0,
 [node name="Antena" parent="." index="3"]
 transform = Transform3D(0.09620984, 0.1263719, 0, -0.1263719, 0.09620984, 0, 0, 0, 0.15882756, -3.016691, 4.3028035, 1.7254152)
 
-[node name="MainSelectorArea" type="Area3D" parent="." index="4"]
+[node name="MainSelectorArea" type="Area3D" parent="." index="4" node_paths=PackedStringArray("area", "mesh_to_rotate")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8435068, 2.6170259, -2.0309858)
+script = ExtResource("3_7h80l")
+min_rotation = -90.0
+max_rotation = 90.0
+area = NodePath(".")
+mesh_to_rotate = NodePath("../Main selector")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MainSelectorArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020446777, 0)
 shape = SubResource("BoxShape3D_y83x7")
 
-[node name="VolumeSelectorArea" type="Area3D" parent="." index="5"]
+[node name="VolumeSelectorArea" type="Area3D" parent="." index="5" node_paths=PackedStringArray("area", "mesh_to_rotate")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4618819, 1.4557496, -2.0309858)
+script = ExtResource("3_7h80l")
+min_rotation = -130.0
+max_rotation = 130.0
+area = NodePath(".")
+mesh_to_rotate = NodePath("../Volume selector")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="VolumeSelectorArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.020446777, 0)

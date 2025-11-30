@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 
 func active_wave_update(delta: float) -> void:
 	if len(wave_collections) == 0:
-		update_wave_collections(0)
+		update_wave_collections()
 
 	active_wave.position.x -= speed*delta
 	var num_points = round(speed / 10)
@@ -102,7 +102,7 @@ func get_tangent(time: float) -> float:
 	return result
 
 
-func update_wave_collections(_min_freq: float):
+func update_wave_collections():
 	var time = x
 	#print("updating wave collections with time %f" % time)
 

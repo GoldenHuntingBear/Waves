@@ -1,109 +1,28 @@
 extends Node3D
 class_name RadioController
 
-@onready var main_selector_area: Area3D = $MainSelectorArea
-@onready var volume_selector_area: Area3D = $VolumeSelectorArea
-@onready var main_selector: MeshInstance3D = $"Main selector"
-@onready var volume_selector: MeshInstance3D = $"Volume selector"
+@onready var main_selector: RotationSelector = $MainSelectorArea
+@onready var volume_selector: RotationSelector = $VolumeSelectorArea
 
-var mouse_position
-var selected_selector
-var mouse_clicked: bool = false
-var mouse_position_when_clicked
-var in_area: bool = false
-var starting_rotation: float = 0
-
-signal updated(frequency)
+signal updated
 
 
 func _ready() -> void:
-	main_selector_area.mouse_entered.connect(func(): begin_selector_control(main_selector_area))
-	main_selector_area.mouse_exited.connect(func(): end_selector_control(main_selector_area))
+	main_selector.updated.connect(updated.emit)
+	volume_selector.updated.connect(updated.emit)
 
-	volume_selector_area.mouse_entered.connect(func(): begin_selector_control(volume_selector_area))
-	volume_selector_area.mouse_exited.connect(func(): end_selector_control(volume_selector_area))
-
-
-func _process(_delta: float) -> void:
-	if not selected_selector:
-		return
-
-	mouse_position = get_viewport().get_mouse_position()
-
-	if not in_area and not mouse_clicked:
-		print("mouse not in area and not clicked (in process), resetting selector")
-		selected_selector = null
-
-		if Input.get_current_cursor_shape() == Input.CURSOR_HSIZE:
-			Input.set_default_cursor_shape(Input.CURSOR_ARROW)
-
-		return
-
-	if not mouse_clicked:
-		starting_rotation = selected_selector.rotation.z
-		return
-
-	if selected_selector and not mouse_position_when_clicked:
-		mouse_position_when_clicked = mouse_position
-
-	if selected_selector:
-		var min_rotation
-		var max_rotation
-		if selected_selector == main_selector:
-			min_rotation = -90
-			max_rotation = 90
-		else:
-			min_rotation = -130
-			max_rotation = 130
-
-		var new_tried_rotation = (mouse_position.x - mouse_position_when_clicked.x) * 0.01 + starting_rotation
-		var old_rotation = selected_selector.rotation.z
-		var new_rotation = clamp(new_tried_rotation, deg_to_rad(min_rotation), deg_to_rad(max_rotation))
-		selected_selector.rotation.z = new_rotation
-
-		if abs(new_rotation - old_rotation) > 0.01:
-			updated.emit(get_sin_wave().frequency)
-
-
-func _input(event):
-	# Mouse in viewport coordinates.
-	if event is InputEventMouseButton and event.button_index == 1:
-		mouse_clicked = event.pressed
-
-		if not event.pressed:
-			mouse_position_when_clicked = null
-
-
-func begin_selector_control(selector: Area3D):
-	#print("begin control %s" % selector)
-	Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
-	in_area = true
-
-	if selected_selector:
-		print("already selector, not changing")
-		return
-
-	if selector == main_selector_area:
-		selected_selector = main_selector
-	else:
-		selected_selector = volume_selector
-
-	starting_rotation = selected_selector.rotation.z
-
-
-func end_selector_control(selector: Area3D):
-	#print("end control %s" % selector)
-	in_area = false
-
-	if not mouse_clicked:
-		print("mouse not in area and not clicked (in end_selector_control), resetting selector")
-		selected_selector = null
+	if not main_selector.selected and not main_selector.in_area and not volume_selector.selected and not volume_selector.in_area:
 		Input.set_default_cursor_shape(Input.CURSOR_ARROW)
 
 
+func _process(_delta: float) -> void:
+	volume_selector.can_be_controlled = not main_selector.selected
+	main_selector.can_be_controlled = not volume_selector.selected
+
+
 func get_sin_wave() -> SinWave:
-	var amplitude = change_max_min(rad_to_deg(volume_selector.rotation.z), -130, 130, 0, 200)
-	var frequency = change_max_min(rad_to_deg(main_selector.rotation.z), -90, 90, 0.5, 2) / 1000
+	var amplitude = change_max_min(rad_to_deg(volume_selector.angle), -130, 130, 0, 200)
+	var frequency = change_max_min(rad_to_deg(main_selector.angle), -90, 90, 0.5, 2) / 1000
 	#print(main_selector.rotation.z, " ", frequency)
 	return SinWave.new(amplitude, frequency)
 
