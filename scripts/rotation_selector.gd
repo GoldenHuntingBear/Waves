@@ -13,7 +13,7 @@ var mouse_position_when_clicked
 var starting_rotation: float
 var in_area: bool = false
 var selected: bool = false
-var angle
+var angle = 0
 
 signal updated
 
@@ -21,11 +21,10 @@ signal updated
 func _ready() -> void:
 	area.mouse_entered.connect(begin_selector_control)
 	area.mouse_exited.connect(end_selector_control)
+	angle = mesh_to_rotate.rotation.z
 
 
 func _process(_delta: float) -> void:
-	angle = mesh_to_rotate.rotation.z
-
 	if debug:
 		pass
 
@@ -56,6 +55,7 @@ func _process(_delta: float) -> void:
 			print("Updating rotation to %f" % new_rotation)
 
 		mesh_to_rotate.rotation.z = new_rotation
+		angle = new_rotation
 		updated.emit()
 
 
