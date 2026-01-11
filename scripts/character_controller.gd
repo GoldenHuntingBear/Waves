@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var wave_controller: WaveController = $"../WaveController"
-@onready var ui_controller: UIController = $"../../UI/UIController"
+@onready var ui_controller: UIController = $"../../UIController"
 
 var score: int = 0
 

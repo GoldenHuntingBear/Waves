@@ -2,16 +2,15 @@ extends Control
 class_name UIController
 
 @export var heart_sprite: CompressedTexture2D
-@onready var hearts_container: HBoxContainer = $Panel/MarginContainer/VBoxContainer/HeartsContainer
-@onready var score_label: Label = $Panel/MarginContainer/VBoxContainer/Control/Score
-@onready var end_screen: Control = $"../../EndScreen"
-@onready var wave_controller: WaveController = $"../../SubViewport/WaveController"
-@onready var restart_button: Button = $"../../EndScreen/Panel/VBoxContainer/RestartButton"
-@onready var score_end_screen: Label = $"../../EndScreen/Panel/VBoxContainer/Label2"
-@onready var pause_screen: Control = $"../../PauseScreen"
-@onready var continue_button: Button = $"../../PauseScreen/Panel/VBoxContainer/ContinueButton"
-@onready var pause_button: Button = $"../../PauseButton"
-
+@onready var hearts_container: HBoxContainer = $"../HeartsUI2/UIController/HeartsContainer"
+@onready var score_label: Label = $"../ScoreUI/UIController/Score"
+@onready var end_screen: Control = $"../EndScreen"
+@onready var wave_controller: WaveController = $"../SubViewport/WaveController"
+@onready var restart_button: Button = $"../EndScreen/Panel/VBoxContainer/RestartButton"
+@onready var score_end_screen: Label = $"../EndScreen/Panel/VBoxContainer/Label2"
+@onready var pause_screen: Control = $"../PauseScreen"
+@onready var continue_button: Button = $"../PauseScreen/Panel/VBoxContainer/ContinueButton"
+@onready var pause_button: Button = $"../PauseButton"
 var score = 0
 var health = 3
 
