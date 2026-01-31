@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Phase" format=3 uid="uid://d21rc6gjj4v3o"]
+
+[ext_resource type="Script" uid="uid://dgud431yqnj0y" path="res://resources/phases/phase.gd" id="1_m21mf"]
+
+[resource]
+script = ExtResource("1_m21mf")
+rewards = false
+reward_time = Vector2(50, 100)
+obstacle_time = Vector2(3, 5)
+obstacle_size = Vector2(0.4, 0.75)
+metadata/_custom_type_script = "uid://dgud431yqnj0y"

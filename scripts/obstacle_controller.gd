@@ -6,9 +6,6 @@ class_name ObstacleController
 @onready var spawn_position_default: Node2D = $SpawnPositionDefault
 @onready var obs_parent: Node2D = $Obstacles
 
-const OBSTACLE_MIN_TIME: float = 400
-const OBSTACLE_MAX_TIME: float = 900
-
 var timer = 10000
 
 
@@ -37,7 +34,7 @@ func spawn_obs():
 
 
 func reset_timer():
-	timer = randf_range(OBSTACLE_MIN_TIME, OBSTACLE_MAX_TIME) #/ wave_controller.speed
+	timer = GameController.current_phase.get_obstacle_timer()
 
 
 func move_obstacles(delta: float):

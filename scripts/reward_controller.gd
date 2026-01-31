@@ -5,9 +5,6 @@ class_name RewardController
 @onready var rewards_parent: Node2D = $Rewards
 @onready var wave_controller: WaveController = $"../WaveController"
 
-const REWARD_MIN_TIME: float = 50
-const REWARD_MAX_TIME: float = 200
-
 var timer = 1000
 
 
@@ -21,7 +18,8 @@ func _process(delta: float) -> void:
 
 	move_rewards(delta)
 	check_positions()
-	timer -= delta * wave_controller.speed
+	if GameController.current_phase.rewards:
+		timer -= delta * wave_controller.speed
 
 	if timer < 0:
 		spawn_reward()
@@ -35,7 +33,7 @@ func spawn_reward():
 
 
 func reset_timer():
-	timer = randf_range(REWARD_MIN_TIME, REWARD_MAX_TIME)
+	timer = GameController.current_phase.get_reward_timer()
 
 
 func move_rewards(delta: float):
