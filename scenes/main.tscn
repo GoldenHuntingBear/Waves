@@ -1,8 +1,7 @@
-[gd_scene format=3 uid="uid://2f3axxmf3kj5"]
+[gd_scene format=3 uid="uid://o1fnrneq7laf"]
 
 [ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://errplgwyrdfm" path="res://scenes/radio.tscn" id="1_a8y0u"]
-[ext_resource type="Texture2D" uid="uid://g2aoi7q7gk7d" path="res://assets/hay_bales_4k.exr" id="1_jkv2x"]
 [ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://scripts/wave_controller.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://dn05votnfqpwh" path="res://scripts/future_wave.gd" id="1_o5qli"]
 [ext_resource type="Texture2D" uid="uid://7xblgqh6jc0n" path="res://assets/screen_background.svg" id="1_ya4ey"]
@@ -15,11 +14,8 @@
 [ext_resource type="Shader" uid="uid://d0we7e3e7yx4a" path="res://shaders/screen_pixelation.gdshader" id="11_ya4ey"]
 [ext_resource type="Script" uid="uid://cbj6w55sh8vpc" path="res://scripts/reward_controller.gd" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://mlcuovhkie85" path="res://scenes/coin.tscn" id="13_trceg"]
-[ext_resource type="Material" uid="uid://yk0c5e2ncpwr" path="res://materials/blinds_mat.tres" id="16_jbj1t"]
-[ext_resource type="Material" uid="uid://cxjw8qa73pe1m" path="res://materials/wall_mat.tres" id="17_dp3eg"]
-[ext_resource type="PackedScene" uid="uid://c2swdnvgb0yd0" path="res://scenes/window.tscn" id="17_muem4"]
-[ext_resource type="PackedScene" uid="uid://b7qr7up7qh0wa" path="res://scenes/blinds_switch.tscn" id="18_0ld40"]
-[ext_resource type="Script" uid="uid://c3sggkqobk00s" path="res://scripts/sun_control.gd" id="18_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://c2swdnvgb0yd0" path="res://scenes/window.tscn" id="17_vxglm"]
+[ext_resource type="PackedScene" uid="uid://itv8kxfetsow" path="res://scenes/sun_control.tscn" id="18_og1vs"]
 [ext_resource type="PackedScene" uid="uid://b7qwt42xflb5q" path="res://assets/waves_viewer_machine.blend" id="21_yc10j"]
 [ext_resource type="Script" uid="uid://dg5r86gdstsrj" path="res://scripts/ui_controller.gd" id="22_jscy8"]
 [ext_resource type="Texture2D" uid="uid://4gbnrimhkfg" path="res://assets/heart.png" id="23_pm3ni"]
@@ -28,52 +24,37 @@
 [ext_resource type="PackedScene" uid="uid://baekjdx3lbj0o" path="res://assets/table.blend" id="25_og1vs"]
 [ext_resource type="Texture2D" uid="uid://b3vqhlu38pxv2" path="res://assets/Power off.png" id="25_vxglm"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_jbj1t"]
-panorama = ExtResource("1_jkv2x")
-energy_multiplier = 0.5
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_infpx"]
+sky_top_color = Color(0.46534193, 0.4483301, 0.37919816, 1)
+sky_horizon_color = Color(0.39927903, 0.6968048, 0.957444, 1)
+ground_bottom_color = Color(0.24741319, 0.33851346, 0.19290528, 1)
+ground_horizon_color = Color(0.67031294, 0.812703, 0.54295313, 1)
 
-[sub_resource type="Sky" id="Sky_muem4"]
-sky_material = SubResource("PanoramaSkyMaterial_jbj1t")
+[sub_resource type="Sky" id="Sky_01uis"]
+sky_material = SubResource("ProceduralSkyMaterial_infpx")
 
-[sub_resource type="Environment" id="Environment_dp3eg"]
+[sub_resource type="Environment" id="Environment_sdew3"]
 background_mode = 2
-sky = SubResource("Sky_muem4")
-sky_rotation = Vector3(0, 1.0559242, 0)
+background_energy_multiplier = 0.8
+sky = SubResource("Sky_01uis")
 tonemap_mode = 2
-glow_enabled = true
+sdfgi_use_occlusion = true
 
-[sub_resource type="Curve2D" id="Curve2D_sugp2"]
-
-[sub_resource type="Curve2D" id="Curve2D_jyhfs"]
-
-[sub_resource type="Curve2D" id="Curve2D_0xm2m"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6gm35"]
 shader = ExtResource("9_85g3d")
 
-[sub_resource type="QuadMesh" id="QuadMesh_tipki"]
+[sub_resource type="QuadMesh" id="QuadMesh_uw7gt"]
 size = Vector2(1280, 720)
 center_offset = Vector3(640, 360, 0)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ie8ei"]
 shader = ExtResource("11_ya4ey")
 shader_parameter/pixelation = 0.0030000001425
 shader_parameter/opacity = 1.0
 
-[sub_resource type="QuadMesh" id="QuadMesh_eb6dy"]
+[sub_resource type="QuadMesh" id="QuadMesh_wf7mf"]
 size = Vector2(1280, 720)
 center_offset = Vector3(640, 360, 0)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_trceg"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8y0u"]
-resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_trceg")
-
-[sub_resource type="QuadMesh" id="QuadMesh_jkv2x"]
-resource_local_to_scene = true
-size = Vector2(128, 72)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_og1vs"]
 atlas = ExtResource("24_y6deb")
@@ -115,7 +96,7 @@ region = Rect2(0, 128, 64, 64)
 atlas = ExtResource("24_y6deb")
 region = Rect2(64, 128, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_j8jky"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_0mu65"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -153,215 +134,166 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vxglm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jusyl"]
 viewport_path = NodePath("HeartsUI2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f3dj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_y6deb"]
+viewport_path = NodePath("HeartsUI2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r03fy"]
 resource_local_to_scene = true
 transparency = 1
-albedo_texture = SubResource("ViewportTexture_vxglm")
+albedo_texture = SubResource("ViewportTexture_jusyl")
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_y6deb")
 
-[sub_resource type="QuadMesh" id="QuadMesh_pm3ni"]
+[sub_resource type="QuadMesh" id="QuadMesh_eubn1"]
 size = Vector2(30, 30)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yq6so"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_4kynf"]
 viewport_path = NodePath("ScoreUI")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fv21b"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_og1vs"]
+viewport_path = NodePath("ScoreUI")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5c6r4"]
 resource_local_to_scene = true
 transparency = 1
-albedo_texture = SubResource("ViewportTexture_yq6so")
+albedo_texture = SubResource("ViewportTexture_4kynf")
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_og1vs")
 
-[sub_resource type="QuadMesh" id="QuadMesh_tel4y"]
+[sub_resource type="QuadMesh" id="QuadMesh_3qnwa"]
 size = Vector2(30, 30)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxglm"]
+[sub_resource type="Curve2D" id="Curve2D_lk2g6"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxglm"]
+[sub_resource type="Curve2D" id="Curve2D_tohek"]
 
-[node name="Main" type="Node3D" unique_id=474188464]
+[sub_resource type="Curve2D" id="Curve2D_66t8q"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=7838184]
-environment = SubResource("Environment_dp3eg")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qdvy0"]
+shader = ExtResource("9_85g3d")
 
-[node name="ReflectionProbe" type="ReflectionProbe" parent="." unique_id=1383475596]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.889526, 25.619247, 121.86157)
-size = Vector3(338.73706, 215.64456, 348.92804)
-interior = true
-enable_shadows = true
+[sub_resource type="QuadMesh" id="QuadMesh_iv48a"]
+size = Vector2(1280, 720)
+center_offset = Vector3(640, 360, 0)
 
-[node name="radio" parent="." unique_id=385312142 instance=ExtResource("1_a8y0u")]
-transform = Transform3D(-6.373158, 0, 2.283803, 0, 6.77, 0, -2.283803, 0, -6.373158, 40.55019, 27.364597, 4.1771355)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dlivt"]
+shader = ExtResource("11_ya4ey")
+shader_parameter/pixelation = 0.0030000001425
+shader_parameter/opacity = 1.0
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=1037689029]
-size = Vector2i(1280, 720)
+[sub_resource type="QuadMesh" id="QuadMesh_h1cgr"]
+size = Vector2(1280, 720)
+center_offset = Vector3(640, 360, 0)
 
-[node name="Background" type="Sprite2D" parent="SubViewport" unique_id=1625138200]
-position = Vector2(640, 360)
-texture = ExtResource("1_ya4ey")
+[sub_resource type="ViewportTexture" id="ViewportTexture_g7wgv"]
+viewport_path = NodePath("SubViewport")
 
-[node name="WaveController" type="Node2D" parent="SubViewport" unique_id=1242867070]
-script = ExtResource("1_jyhfs")
+[sub_resource type="ViewportTexture" id="ViewportTexture_pm3ni"]
+viewport_path = NodePath("SubViewport")
 
-[node name="ActiveWave" type="Path2D" parent="SubViewport/WaveController" unique_id=2007427360]
-position = Vector2(150, 360)
-curve = SubResource("Curve2D_sugp2")
-script = ExtResource("1_0wfyh")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x752u"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_g7wgv")
+emission_enabled = true
+emission_texture = SubResource("ViewportTexture_pm3ni")
 
-[node name="TransitionWave" type="Path2D" parent="SubViewport/WaveController" unique_id=1612115939]
-position = Vector2(150, 360)
-curve = SubResource("Curve2D_jyhfs")
-script = ExtResource("4_tbgi4")
+[sub_resource type="QuadMesh" id="QuadMesh_0ryws"]
+resource_local_to_scene = true
+size = Vector2(128, 72)
 
-[node name="FutureWave" type="Path2D" parent="SubViewport/WaveController" unique_id=2118585297]
-position = Vector2(150, 360)
-curve = SubResource("Curve2D_0xm2m")
-script = ExtResource("1_o5qli")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jqpb0"]
 
-[node name="ObstacleController" type="Node2D" parent="SubViewport" unique_id=2103592942]
-script = ExtResource("7_o6xl0")
-obs_scene = ExtResource("8_tipki")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtlaw"]
 
-[node name="SpawnPositionDefault" type="Node2D" parent="SubViewport/ObstacleController" unique_id=943590840]
-position = Vector2(1300, 360)
+[node name="Main" type="Node3D" unique_id=238871271]
 
-[node name="Obstacles" type="Node2D" parent="SubViewport/ObstacleController" unique_id=988292400]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2053800121]
+environment = SubResource("Environment_sdew3")
 
-[node name="Character" parent="SubViewport" unique_id=388049783 instance=ExtResource("9_ya4ey")]
-position = Vector2(150, 360)
-scale = Vector2(0.08, 0.08)
-
-[node name="RewardController" type="Node2D" parent="SubViewport" unique_id=254721761]
-script = ExtResource("12_eb6dy")
-coin_scene = ExtResource("13_trceg")
-
-[node name="Rewards" type="Node2D" parent="SubViewport/RewardController" unique_id=487397961]
-position = Vector2(1300, 360)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport" unique_id=471792956]
-
-[node name="ScreenEffect" type="MeshInstance2D" parent="SubViewport/CanvasLayer" unique_id=2092958632]
-material = SubResource("ShaderMaterial_choun")
-mesh = SubResource("QuadMesh_tipki")
-
-[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewport/CanvasLayer" unique_id=800189090]
-copy_mode = 2
-
-[node name="ScreenPixelation" type="MeshInstance2D" parent="SubViewport/CanvasLayer" unique_id=963477971]
-material = SubResource("ShaderMaterial_ya4ey")
-mesh = SubResource("QuadMesh_eb6dy")
-
-[node name="Screen" type="MeshInstance3D" parent="." unique_id=1370862342]
-transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, -16.54123, -7.473628, 19.976547)
-material_override = SubResource("StandardMaterial3D_a8y0u")
-mesh = SubResource("QuadMesh_jkv2x")
-
-[node name="Control" type="Node3D" parent="." unique_id=916385122]
+[node name="Control" type="Node3D" parent="." unique_id=164273711]
 script = ExtResource("2_0wfyh")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1148637220]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.532349, 93.20758)
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1996600002]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.447209, 6.381782, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=975276913]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 351.7426, -939.6114)
+[node name="Ground" type="CSGBox3D" parent="." unique_id=1289160802]
+transform = Transform3D(34.397995, 0, 0, 0, 0.079999976, 0, 0, 0, 31.298403, 0, -0.07085812, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1273186324]
+transform = Transform3D(0, 0.5, -0.8660254, 0, 0.8660254, 0.5, 1, 0, 0, -32.50425, 14, 0)
 shadow_enabled = true
 
-[node name="Walls" type="Node3D" parent="." unique_id=1920603118]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3690414, 13.914429)
+[node name="radio" parent="." unique_id=640481479 instance=ExtResource("1_a8y0u")]
+transform = Transform3D(-0.19132121, 0.008018734, -0.4182486, 0.0192628, 0.4595965, 0, 0.41788176, -0.017514434, -0.19148917, -13.907708, 7.457649, -2.967828)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Walls" unique_id=2503989]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116.91046, 26.67717, -37.93343)
-size = Vector3(173.27063, 223.48764, 13.75)
-material = ExtResource("17_dp3eg")
+[node name="window" parent="." unique_id=322867922 instance=ExtResource("17_vxglm")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -16.849491, 11.039185, 0.82268786)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Walls" unique_id=147266322]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.71527, 25.653656, -37.562824)
-material_override = ExtResource("17_dp3eg")
-size = Vector3(93.46118, 221.44061, 13.008789)
+[node name="SunControl" parent="." unique_id=619501683 instance=ExtResource("18_og1vs")]
+transform = Transform3D(-3.5634387e-09, 0, 0.1363554, 0, 0.07925574, 0, -0.08152198, 0, -5.9602834e-09, -13.767181, 5.1667747, -0.4330473)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Walls" unique_id=1269639850]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7004547, -24.038246, -37.679523)
-material_override = ExtResource("17_dp3eg")
-size = Vector3(173.27063, 122.05681, 13.2421875)
+[node name="walls" type="Node3D" parent="." unique_id=427566948]
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Walls" unique_id=1891390101]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7004547, 115.10745, -37.650105)
-material_override = ExtResource("17_dp3eg")
-size = Vector3(173.27063, 45, 13.18335)
+[node name="CSGBox3D" type="CSGBox3D" parent="walls" unique_id=1797498695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.933857, 7.754012, -8.95597)
+size = Vector3(1, 15.927246, 13.687988)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Walls" unique_id=142836171]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 190.86801, 26.67717, 121.74782)
-size = Vector3(317.90594, 223.48764, 1)
-material = ExtResource("17_dp3eg")
+[node name="CSGBox3D2" type="CSGBox3D" parent="walls" unique_id=1673909996]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -2.275858, 15.031747, -1.1072388)
+size = Vector3(1, 28.454346, 33.87805)
 
-[node name="CSGBox3D6" type="CSGBox3D" parent="Walls" unique_id=826082452]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -130.20462, 26.67717, 121.74782)
-size = Vector3(317.90594, 223.48764, 1)
-material = ExtResource("17_dp3eg")
+[node name="CSGBox3D3" type="CSGBox3D" parent="walls" unique_id=309331175]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.933857, 7.754012, 9.827764)
+size = Vector3(1, 15.927246, 12.020996)
 
-[node name="CSGBox3D7" type="CSGBox3D" parent="Walls" unique_id=1991099891]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.526367, 26.67717, 275.13177)
-size = Vector3(317.90594, 223.48764, 1)
+[node name="CSGBox3D4" type="CSGBox3D" parent="walls" unique_id=1881905434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.405018, 7.754012, 0.05212879)
+visible = false
+size = Vector3(1, 15.927246, 31.572266)
 
-[node name="CSGBox3D8" type="CSGBox3D" parent="Walls" unique_id=1851560475]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, -76.72765, 118.1194)
-size = Vector3(405.6161, 327.50836, 1)
-material = ExtResource("17_dp3eg")
+[node name="CSGBox3D5" type="CSGBox3D" parent="walls" unique_id=550860343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.933857, 3.9492025, 0.76321507)
+size = Vector3(1, 8.317627, 6.3312073)
 
-[node name="CSGBox3D9" type="CSGBox3D" parent="Walls" unique_id=62784044]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, 127.11814, 118.1194)
-size = Vector3(405.6161, 327.50836, 1)
+[node name="CSGBox3D6" type="CSGBox3D" parent="walls" unique_id=195782647]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.933857, 14.822902, 0.837157)
+size = Vector3(1, 1.6739807, 6.461792)
 
-[node name="window" parent="." unique_id=654867645 instance=ExtResource("17_muem4")]
-transform = Transform3D(13.460404, 0, 0, 0, 9.364882, 0, 0, 0, 4.5407686, -10.439056, 69.683174, -20.227503)
+[node name="CSGBox3D7" type="CSGBox3D" parent="walls" unique_id=1343902583]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.0006542, 7.754012, -15.554841)
+size = Vector3(1, 15.927246, 31.572266)
 
-[node name="SunControl" type="Node3D" parent="." unique_id=1278328275]
-script = ExtResource("18_gqmmt")
+[node name="CSGBox3D8" type="CSGBox3D" parent="walls" unique_id=2035671592]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -2.0006542, 7.754012, 15.219773)
+size = Vector3(1, 15.927246, 31.572266)
 
-[node name="blinds_switch" parent="SunControl" unique_id=938521542 instance=ExtResource("18_0ld40")]
-transform = Transform3D(4.2989573, 0, 0, 0, 3.9321392, 0, 0, 0, 3.517714, -74.41091, 71.32278, -16.722366)
+[node name="table" parent="." unique_id=825334848 instance=ExtResource("25_og1vs")]
+transform = Transform3D(-9.616505e-08, 0, 2.2, 0, 2.2, 0, -2.2, 0, -9.616505e-08, -13.412447, -1.4505231, 0.005443096)
 
-[node name="Blinds" type="Node3D" parent="SunControl" unique_id=332643255]
-transform = Transform3D(0.636289, 0, 0, 0, 1, 0, 0, 0, 1, -8.733, 80, -16.186)
+[node name="waves_viewer_machine" parent="." unique_id=323884906 instance=ExtResource("21_yc10j")]
+transform = Transform3D(-8.794928e-05, 0, -0.35999998, 0, 0.36, 0, 0.35999998, 0, -8.794928e-05, -13.385011, 5.726, 0.729)
 
-[node name="BlindsTexture" type="CSGBox3D" parent="SunControl/Blinds" unique_id=490971795]
-material_override = ExtResource("16_jbj1t")
-gi_mode = 2
-size = Vector3(173.27063, 75.3123, 1)
-material = ExtResource("16_jbj1t")
-
-[node name="CSGBox3D" type="CSGBox3D" parent="SunControl/Blinds" unique_id=1947491439]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6412506, -36.402496, 0.060302734)
-gi_mode = 2
-size = Vector3(173.93643, 2.3291016, 2.3012695)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1919713502]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0957413, 79.80734, 65.53519)
-shadow_enabled = true
-omni_range = 177.30307
-omni_attenuation = 3.433
-
-[node name="waves_viewer_machine" parent="." unique_id=251879435 instance=ExtResource("21_yc10j")]
-transform = Transform3D(-6.3299994, 0, 0.0015463659, 0, 6.33, 0, -0.0015463659, 0, -6.3299994, -15.55238, -3.7999535, 2.1643753)
-
-[node name="HeartsUI2" type="SubViewport" parent="." unique_id=1131812106]
+[node name="HeartsUI2" type="SubViewport" parent="." unique_id=135261286]
 transparent_bg = true
 size = Vector2i(300, 500)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="HeartsUI2" unique_id=1567854116]
+[node name="CanvasLayer" type="CanvasLayer" parent="HeartsUI2" unique_id=1011807430]
 
-[node name="ScreenEffect" type="MeshInstance2D" parent="HeartsUI2/CanvasLayer" unique_id=164819885]
-material = SubResource("ShaderMaterial_choun")
-mesh = SubResource("QuadMesh_tipki")
+[node name="ScreenEffect" type="MeshInstance2D" parent="HeartsUI2/CanvasLayer" unique_id=23126617]
+material = SubResource("ShaderMaterial_6gm35")
+mesh = SubResource("QuadMesh_uw7gt")
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="HeartsUI2/CanvasLayer" unique_id=1029067658]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="HeartsUI2/CanvasLayer" unique_id=143726683]
 copy_mode = 2
 
-[node name="ScreenPixelation" type="MeshInstance2D" parent="HeartsUI2/CanvasLayer" unique_id=1077793792]
-material = SubResource("ShaderMaterial_ya4ey")
-mesh = SubResource("QuadMesh_eb6dy")
+[node name="ScreenPixelation" type="MeshInstance2D" parent="HeartsUI2/CanvasLayer" unique_id=1437077805]
+material = SubResource("ShaderMaterial_ie8ei")
+mesh = SubResource("QuadMesh_wf7mf")
 
-[node name="UIController" type="Control" parent="HeartsUI2" unique_id=625698321]
+[node name="UIController" type="Control" parent="HeartsUI2" unique_id=1838475553]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -371,7 +303,7 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 
-[node name="HeartsContainer" type="HBoxContainer" parent="HeartsUI2/UIController" unique_id=466600996]
+[node name="HeartsContainer" type="HBoxContainer" parent="HeartsUI2/UIController" unique_id=90492344]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -382,45 +314,45 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[node name="TextureRect" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=576576916]
+[node name="TextureRect" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=119386067]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("23_pm3ni")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=481992085]
+[node name="TextureRect2" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=499564540]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("23_pm3ni")
 expand_mode = 1
 
-[node name="TextureRect3" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=1731691660]
+[node name="TextureRect3" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=1112995157]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("23_pm3ni")
 expand_mode = 1
 
-[node name="ScoreUI" type="SubViewport" parent="." unique_id=824969821]
+[node name="ScoreUI" type="SubViewport" parent="." unique_id=1863604413]
 transparent_bg = true
 size = Vector2i(525, 180)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="ScoreUI" unique_id=22398650]
+[node name="CanvasLayer" type="CanvasLayer" parent="ScoreUI" unique_id=404497529]
 
-[node name="ScreenEffect" type="MeshInstance2D" parent="ScoreUI/CanvasLayer" unique_id=321936534]
-material = SubResource("ShaderMaterial_choun")
-mesh = SubResource("QuadMesh_tipki")
+[node name="ScreenEffect" type="MeshInstance2D" parent="ScoreUI/CanvasLayer" unique_id=1100194206]
+material = SubResource("ShaderMaterial_6gm35")
+mesh = SubResource("QuadMesh_uw7gt")
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="ScoreUI/CanvasLayer" unique_id=571107284]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ScoreUI/CanvasLayer" unique_id=5572186]
 copy_mode = 2
 
-[node name="ScreenPixelation" type="MeshInstance2D" parent="ScoreUI/CanvasLayer" unique_id=1889291041]
-material = SubResource("ShaderMaterial_ya4ey")
-mesh = SubResource("QuadMesh_eb6dy")
+[node name="ScreenPixelation" type="MeshInstance2D" parent="ScoreUI/CanvasLayer" unique_id=1157694927]
+material = SubResource("ShaderMaterial_ie8ei")
+mesh = SubResource("QuadMesh_wf7mf")
 
-[node name="UIController" type="Control" parent="ScoreUI" unique_id=96203415]
+[node name="UIController" type="Control" parent="ScoreUI" unique_id=1809182686]
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 3
 anchors_preset = 8
@@ -437,20 +369,20 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 
-[node name="Control2" type="Control" parent="ScoreUI/UIController" unique_id=2094188988]
+[node name="Control2" type="Control" parent="ScoreUI/UIController" unique_id=855485474]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
 grow_vertical = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ScoreUI/UIController/Control2" unique_id=1028562410]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ScoreUI/UIController/Control2" unique_id=279383384]
 position = Vector2(94, 9.536743e-07)
 scale = Vector2(2.927074, 2.7495437)
-sprite_frames = SubResource("SpriteFrames_j8jky")
+sprite_frames = SubResource("SpriteFrames_0mu65")
 autoplay = "default"
 
-[node name="Score" type="Label" parent="ScoreUI/UIController" unique_id=1170022281]
+[node name="Score" type="Label" parent="ScoreUI/UIController" unique_id=27746040]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -466,41 +398,102 @@ size_flags_horizontal = 10
 theme_override_font_sizes/font_size = 121
 text = "0"
 
-[node name="HeartsUI" type="MeshInstance3D" parent="." unique_id=772517853]
-transform = Transform3D(1.1034625, 0, 0, 0, 0.3794316, 0, 0, 0, 1, 57.29767, 15.889421, 20.523443)
-material_override = SubResource("StandardMaterial3D_2f3dj")
-mesh = SubResource("QuadMesh_pm3ni")
+[node name="HeartsUI" type="MeshInstance3D" parent="." unique_id=2136701923]
+transform = Transform3D(-2.7730442e-09, 0, 0.155, 0, 0.022309689, 0, -0.06343986, 0, -6.7752652e-09, -12.345152, 6.8707585, -3.3803582)
+material_override = SubResource("StandardMaterial3D_r03fy")
+mesh = SubResource("QuadMesh_eubn1")
 skeleton = NodePath("../ScoreUI2")
 
-[node name="ScoreUI2" type="MeshInstance3D" parent="." unique_id=894489083]
-transform = Transform3D(1.0815314, 0, 0, 0, 0.38525444, 0, 0, 0, 1, 56.996292, 1.2628045, 21.050362)
-material_override = SubResource("StandardMaterial3D_fv21b")
-mesh = SubResource("QuadMesh_tel4y")
+[node name="ScoreUI2" type="MeshInstance3D" parent="." unique_id=1615536214]
+transform = Transform3D(-2.7303575e-09, 0, 0.99999994, 0, 0.0222942, 0, -0.062463302, 0, -4.3711385e-08, -12.317131, 6.032812, -3.38579)
+material_override = SubResource("StandardMaterial3D_5c6r4")
+mesh = SubResource("QuadMesh_3qnwa")
 
-[node name="table" parent="." unique_id=1457087688 instance=ExtResource("25_og1vs")]
-transform = Transform3D(42.97575, 0, 0, 0, 30, 0, 0, 0, 30, -2.6255722, -110.36323, -5.387802)
+[node name="SubViewport" type="SubViewport" parent="." unique_id=2118000216]
+size = Vector2i(1280, 720)
 
-[node name="PauseButton" type="Button" parent="." unique_id=678812264]
+[node name="Background" type="Sprite2D" parent="SubViewport" unique_id=2046080996]
+position = Vector2(640, 360)
+texture = ExtResource("1_ya4ey")
+
+[node name="WaveController" type="Node2D" parent="SubViewport" unique_id=1379488283]
+script = ExtResource("1_jyhfs")
+
+[node name="ActiveWave" type="Path2D" parent="SubViewport/WaveController" unique_id=693777443]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_lk2g6")
+script = ExtResource("1_0wfyh")
+
+[node name="TransitionWave" type="Path2D" parent="SubViewport/WaveController" unique_id=4387344]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_tohek")
+script = ExtResource("4_tbgi4")
+
+[node name="FutureWave" type="Path2D" parent="SubViewport/WaveController" unique_id=1331388150]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_66t8q")
+script = ExtResource("1_o5qli")
+
+[node name="ObstacleController" type="Node2D" parent="SubViewport" unique_id=1482267325]
+script = ExtResource("7_o6xl0")
+obs_scene = ExtResource("8_tipki")
+
+[node name="SpawnPositionDefault" type="Node2D" parent="SubViewport/ObstacleController" unique_id=149842146]
+position = Vector2(1300, 360)
+
+[node name="Obstacles" type="Node2D" parent="SubViewport/ObstacleController" unique_id=1610943852]
+
+[node name="Character" parent="SubViewport" unique_id=1329618250 instance=ExtResource("9_ya4ey")]
+position = Vector2(150, 360)
+scale = Vector2(0.08, 0.08)
+
+[node name="RewardController" type="Node2D" parent="SubViewport" unique_id=1280767262]
+script = ExtResource("12_eb6dy")
+coin_scene = ExtResource("13_trceg")
+
+[node name="Rewards" type="Node2D" parent="SubViewport/RewardController" unique_id=408386657]
+position = Vector2(1300, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport" unique_id=979383733]
+
+[node name="ScreenEffect" type="MeshInstance2D" parent="SubViewport/CanvasLayer" unique_id=1838146670]
+material = SubResource("ShaderMaterial_qdvy0")
+mesh = SubResource("QuadMesh_iv48a")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewport/CanvasLayer" unique_id=1695853855]
+copy_mode = 2
+
+[node name="ScreenPixelation" type="MeshInstance2D" parent="SubViewport/CanvasLayer" unique_id=1058266029]
+material = SubResource("ShaderMaterial_dlivt")
+mesh = SubResource("QuadMesh_h1cgr")
+
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=623124653]
+transform = Transform3D(-2.0510236e-09, 0, 0.99999994, 0, 0.045338895, 0, -0.046921957, 0, -4.3711385e-08, -12.389443, 5.520225, 0.7701398)
+material_override = SubResource("StandardMaterial3D_x752u")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_0ryws")
+
+[node name="PauseButton" type="Button" parent="." unique_id=531036546]
 custom_minimum_size = Vector2(50, 50)
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -220.0
-offset_top = -103.0
-offset_right = -157.0
-offset_bottom = -40.0
+offset_left = -180.0
+offset_top = -102.0
+offset_right = -117.0
+offset_bottom = -39.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_styles/hover = SubResource("StyleBoxFlat_vxglm")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_vxglm")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jqpb0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vtlaw")
 icon = ExtResource("25_vxglm")
 flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="EndScreen" type="Control" parent="." unique_id=1528639391]
+[node name="EndScreen" type="Control" parent="." unique_id=1475590158]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -509,7 +502,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="EndScreen" unique_id=1898114398]
+[node name="Panel" type="Panel" parent="EndScreen" unique_id=1650728251]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -517,7 +510,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/Panel" unique_id=683777082]
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/Panel" unique_id=430692732]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -531,27 +524,27 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="EndScreen/Panel/VBoxContainer" unique_id=1424466750]
+[node name="Label" type="Label" parent="EndScreen/Panel/VBoxContainer" unique_id=16286012]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 58
 text = "Game Over"
 
-[node name="Label2" type="Label" parent="EndScreen/Panel/VBoxContainer" unique_id=358853357]
+[node name="Label2" type="Label" parent="EndScreen/Panel/VBoxContainer" unique_id=334348970]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Score: 100"
 
-[node name="Control" type="Control" parent="EndScreen/Panel/VBoxContainer" unique_id=1248843435]
+[node name="Control" type="Control" parent="EndScreen/Panel/VBoxContainer" unique_id=1873915938]
 custom_minimum_size = Vector2(0.25, 100)
 layout_mode = 2
 
-[node name="RestartButton" type="Button" parent="EndScreen/Panel/VBoxContainer" unique_id=292904750]
+[node name="RestartButton" type="Button" parent="EndScreen/Panel/VBoxContainer" unique_id=963383947]
 layout_mode = 2
 theme = ExtResource("25_2wyq8")
 text = "Restart"
 
-[node name="PauseScreen" type="Control" parent="." unique_id=13337704]
+[node name="PauseScreen" type="Control" parent="." unique_id=2051101144]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -560,7 +553,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="PauseScreen" unique_id=466163271]
+[node name="Panel" type="Panel" parent="PauseScreen" unique_id=1438186265]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -568,7 +561,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/Panel" unique_id=1914883898]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/Panel" unique_id=193643465]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -582,27 +575,25 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="PauseScreen/Panel/VBoxContainer" unique_id=1457655763]
+[node name="Label" type="Label" parent="PauseScreen/Panel/VBoxContainer" unique_id=2067104693]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 58
 text = "Game Paused"
 
-[node name="Control" type="Control" parent="PauseScreen/Panel/VBoxContainer" unique_id=243812463]
+[node name="Control" type="Control" parent="PauseScreen/Panel/VBoxContainer" unique_id=859022533]
 custom_minimum_size = Vector2(0.25, 100)
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="PauseScreen/Panel/VBoxContainer" unique_id=48502020]
+[node name="ContinueButton" type="Button" parent="PauseScreen/Panel/VBoxContainer" unique_id=1322714921]
 layout_mode = 2
 theme = ExtResource("25_2wyq8")
 text = "Continue"
 
-[node name="UIController" type="Control" parent="." unique_id=1948328870]
+[node name="UIController" type="Control" parent="." unique_id=170602759]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("22_jscy8")
 heart_sprite = ExtResource("23_pm3ni")
-
-[editable path="SunControl/blinds_switch"]

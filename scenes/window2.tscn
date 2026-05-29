@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cxgtb3xkfofxc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y6w7o"]
+albedo_color = Color(1, 1, 1, 0.09803922)
+clearcoat_enabled = true
+clearcoat_roughness = 0.0
+refraction_enabled = true
+
+[node name="window" type="Node3D" unique_id=1354990923]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1958958049]
+size = Vector3(5.6, 5.6, 0.2)
+material = SubResource("StandardMaterial3D_y6w7o")

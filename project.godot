@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Waves"
-run/main_scene="uid://2f3axxmf3kj5"
+run/main_scene="uid://o1fnrneq7laf"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2swdnvgb0yd0"]
+[gd_scene format=3 uid="uid://c2swdnvgb0yd0"]
 
 [ext_resource type="PackedScene" uid="uid://yicxnttn7uc2" path="res://assets/window.blend" id="1_oya5r"]
 [ext_resource type="Shader" uid="uid://dxemxfais01m6" path="res://shaders/window.gdshader" id="2_to7fh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_to7fh"]
+albedo_color = Color(0.58431375, 1, 1, 0.101960786)
+refraction_enabled = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_to7fh"]
 
@@ -13,12 +17,17 @@ shader_parameter/roughness = 0.15
 shader_parameter/normal_strength = 1.0
 shader_parameter/edge_color = Color(0, 0, 0, 1)
 
-[node name="window" instance=ExtResource("1_oya5r")]
+[node name="window" unique_id=322867922 instance=ExtResource("1_oya5r")]
 
-[node name="Cube_001" parent="." index="1"]
+[node name="CSGBox3D" type="CSGBox3D" parent="." index="1" unique_id=1492362981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013244629, -0.006958008, 0.0050354004)
+size = Vector3(5.6990967, 5.6574707, 0.19476318)
+material = SubResource("StandardMaterial3D_to7fh")
+
+[node name="Cube_001" parent="." index="2"]
 visible = false
 
-[node name="Cube_002" type="MeshInstance3D" parent="." index="2"]
+[node name="Cube_002" type="MeshInstance3D" parent="." index="3" unique_id=671386338]
 transform = Transform3D(5.711789, 0, 0, 0, 5.6028733, 0, 0, 0, 0.047961928, 0, 0, 0)
 mesh = SubResource("QuadMesh_to7fh")
 skeleton = NodePath("")

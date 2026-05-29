@@ -1,0 +1,578 @@
+[gd_scene format=3 uid="uid://2f3axxmf3kj5"]
+
+[ext_resource type="PackedScene" uid="uid://errplgwyrdfm" path="res://scenes/radio.tscn" id="1_0hy1y"]
+[ext_resource type="Texture2D" uid="uid://7xblgqh6jc0n" path="res://assets/screen_background.svg" id="2_4vpt6"]
+[ext_resource type="Script" uid="uid://dagjeohgltms0" path="res://scripts/wave_controller.gd" id="3_m4ssf"]
+[ext_resource type="Script" uid="uid://cdoc6is4spqat" path="res://scripts/active_wave.gd" id="4_yt53t"]
+[ext_resource type="Script" uid="uid://woowu6jigil" path="res://scripts/transition_wave.gd" id="5_s2bw0"]
+[ext_resource type="Script" uid="uid://dn05votnfqpwh" path="res://scripts/future_wave.gd" id="6_3tqf5"]
+[ext_resource type="Script" uid="uid://dvocxdxd0w5r7" path="res://scripts/obstacle_controller.gd" id="7_fkmxq"]
+[ext_resource type="PackedScene" uid="uid://codn6ehkemi1f" path="res://scenes/wall.tscn" id="8_con8q"]
+[ext_resource type="PackedScene" uid="uid://dtdsgo5copu4j" path="res://scenes/Character.tscn" id="9_nsenn"]
+[ext_resource type="Script" uid="uid://cbj6w55sh8vpc" path="res://scripts/reward_controller.gd" id="10_67dmx"]
+[ext_resource type="PackedScene" uid="uid://mlcuovhkie85" path="res://scenes/coin.tscn" id="11_h1e70"]
+[ext_resource type="Shader" uid="uid://bo12kjbqjv4v4" path="res://shaders/screen_effect.gdshader" id="12_e2gag"]
+[ext_resource type="Shader" uid="uid://d0we7e3e7yx4a" path="res://shaders/screen_pixelation.gdshader" id="13_lrk0c"]
+[ext_resource type="Script" uid="uid://0g1cq8xwpvgj" path="res://scripts/input_controller.gd" id="14_ih1lv"]
+[ext_resource type="Material" uid="uid://cxjw8qa73pe1m" path="res://materials/wall_mat.tres" id="15_yo1j3"]
+[ext_resource type="PackedScene" uid="uid://cxgtb3xkfofxc" path="res://scenes/window2.tscn" id="16_rb60s"]
+[ext_resource type="PackedScene" uid="uid://c2swdnvgb0yd0" path="res://scenes/window.tscn" id="17_bimrl"]
+[ext_resource type="PackedScene" uid="uid://itv8kxfetsow" path="res://scenes/sun_control.tscn" id="18_j0h3d"]
+[ext_resource type="PackedScene" uid="uid://b7qwt42xflb5q" path="res://assets/waves_viewer_machine.blend" id="19_s7opg"]
+[ext_resource type="Texture2D" uid="uid://4gbnrimhkfg" path="res://assets/heart.png" id="20_x2h4l"]
+[ext_resource type="Texture2D" uid="uid://dlji36eqg5e4j" path="res://assets/coin_spritesheet.png" id="21_gn2w7"]
+[ext_resource type="PackedScene" uid="uid://baekjdx3lbj0o" path="res://assets/table.blend" id="22_0s5qc"]
+[ext_resource type="Texture2D" uid="uid://b3vqhlu38pxv2" path="res://assets/Power off.png" id="23_wxl41"]
+[ext_resource type="Theme" uid="uid://c4vmdm81yol20" path="res://main_theme.tres" id="24_emjxo"]
+[ext_resource type="Script" uid="uid://dg5r86gdstsrj" path="res://scripts/ui_controller.gd" id="25_ddqyk"]
+
+[sub_resource type="Environment" id="Environment_dp3eg"]
+background_mode = 1
+sky_rotation = Vector3(0, 1.0559242, 0)
+sdfgi_use_occlusion = true
+sdfgi_min_cell_size = 0.390625
+
+[sub_resource type="Curve2D" id="Curve2D_sugp2"]
+
+[sub_resource type="Curve2D" id="Curve2D_jyhfs"]
+
+[sub_resource type="Curve2D" id="Curve2D_0xm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+shader = ExtResource("12_e2gag")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tipki"]
+size = Vector2(1280, 720)
+center_offset = Vector3(640, 360, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+shader = ExtResource("13_lrk0c")
+shader_parameter/pixelation = 0.0030000001425
+shader_parameter/opacity = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_eb6dy"]
+size = Vector2(1280, 720)
+center_offset = Vector3(640, 360, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_trceg"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8y0u"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_trceg")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jkv2x"]
+resource_local_to_scene = true
+size = Vector2(128, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og1vs"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wyq8"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxglm"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f3dj"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq6so"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv21b"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tel4y"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qkpxi"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5q0nq"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dgi5k"]
+atlas = ExtResource("21_gn2w7")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j8jky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og1vs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wyq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxglm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f3dj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq6so")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv21b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tel4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qkpxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5q0nq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dgi5k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vxglm"]
+viewport_path = NodePath("HeartsUI2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2f3dj"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_vxglm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_pm3ni"]
+size = Vector2(30, 30)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yq6so"]
+viewport_path = NodePath("ScoreUI")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fv21b"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_yq6so")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tel4y"]
+size = Vector2(30, 30)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxglm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxglm"]
+
+[node name="OldMain" type="Node3D" unique_id=474188464]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=7838184]
+environment = SubResource("Environment_dp3eg")
+
+[node name="radio" parent="." unique_id=385312142 instance=ExtResource("1_0hy1y")]
+transform = Transform3D(-6.373158, 0, 2.283803, 0, 6.77, 0, -2.283803, 0, -6.373158, 40.55019, 27.364597, 4.1771355)
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1037689029]
+size = Vector2i(1280, 720)
+
+[node name="Background" type="Sprite2D" parent="SubViewport" unique_id=1625138200]
+position = Vector2(640, 360)
+texture = ExtResource("2_4vpt6")
+
+[node name="WaveController" type="Node2D" parent="SubViewport" unique_id=1242867070]
+script = ExtResource("3_m4ssf")
+
+[node name="ActiveWave" type="Path2D" parent="SubViewport/WaveController" unique_id=2007427360]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_sugp2")
+script = ExtResource("4_yt53t")
+
+[node name="TransitionWave" type="Path2D" parent="SubViewport/WaveController" unique_id=1612115939]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_jyhfs")
+script = ExtResource("5_s2bw0")
+
+[node name="FutureWave" type="Path2D" parent="SubViewport/WaveController" unique_id=2118585297]
+position = Vector2(150, 360)
+curve = SubResource("Curve2D_0xm2m")
+script = ExtResource("6_3tqf5")
+
+[node name="ObstacleController" type="Node2D" parent="SubViewport" unique_id=2103592942]
+script = ExtResource("7_fkmxq")
+obs_scene = ExtResource("8_con8q")
+
+[node name="SpawnPositionDefault" type="Node2D" parent="SubViewport/ObstacleController" unique_id=943590840]
+position = Vector2(1300, 360)
+
+[node name="Obstacles" type="Node2D" parent="SubViewport/ObstacleController" unique_id=988292400]
+
+[node name="Character" parent="SubViewport" unique_id=388049783 instance=ExtResource("9_nsenn")]
+position = Vector2(150, 360)
+scale = Vector2(0.08, 0.08)
+
+[node name="RewardController" type="Node2D" parent="SubViewport" unique_id=254721761]
+script = ExtResource("10_67dmx")
+coin_scene = ExtResource("11_h1e70")
+
+[node name="Rewards" type="Node2D" parent="SubViewport/RewardController" unique_id=487397961]
+position = Vector2(1300, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport" unique_id=471792956]
+
+[node name="ScreenEffect" type="MeshInstance2D" parent="SubViewport/CanvasLayer" unique_id=2092958632]
+material = SubResource("ShaderMaterial_choun")
+mesh = SubResource("QuadMesh_tipki")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="SubViewport/CanvasLayer" unique_id=800189090]
+copy_mode = 2
+
+[node name="ScreenPixelation" type="MeshInstance2D" parent="SubViewport/CanvasLayer" unique_id=963477971]
+material = SubResource("ShaderMaterial_ya4ey")
+mesh = SubResource("QuadMesh_eb6dy")
+
+[node name="Screen" type="MeshInstance3D" parent="." unique_id=1370862342]
+transform = Transform3D(0.82, 0, 0, 0, 0.82, 0, 0, 0, 0.82, -16.54123, -7.473628, 19.976547)
+material_override = SubResource("StandardMaterial3D_a8y0u")
+mesh = SubResource("QuadMesh_jkv2x")
+
+[node name="Control" type="Node3D" parent="." unique_id=916385122]
+script = ExtResource("14_ih1lv")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1148637220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.532349, 93.20758)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=975276913]
+transform = Transform3D(1, 0, 0, 0, -0.8617088, 0.50740314, 0, -0.50740314, -0.8617088, 0, 91.56292, -201.1378)
+light_color = Color(1, 0, 1, 1)
+light_energy = 5.547
+shadow_enabled = true
+
+[node name="Walls" type="Node3D" parent="." unique_id=1920603118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3690414, 13.914429)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Walls" unique_id=2503989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116.91046, 26.67717, -37.93343)
+size = Vector3(173.27063, 223.48764, 13.75)
+material = ExtResource("15_yo1j3")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Walls" unique_id=147266322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.71527, 25.653656, -37.562824)
+material_override = ExtResource("15_yo1j3")
+size = Vector3(93.46118, 221.44061, 13.008789)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Walls" unique_id=1269639850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7004547, -24.038246, -37.679523)
+material_override = ExtResource("15_yo1j3")
+size = Vector3(173.27063, 122.05681, 13.2421875)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Walls" unique_id=1891390101]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7004547, 115.10745, -37.650105)
+material_override = ExtResource("15_yo1j3")
+size = Vector3(173.27063, 45, 13.18335)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Walls" unique_id=142836171]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 190.86801, 26.67717, 121.74782)
+size = Vector3(317.90594, 223.48764, 1)
+material = ExtResource("15_yo1j3")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Walls" unique_id=826082452]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -130.20462, 26.67717, 121.74782)
+size = Vector3(317.90594, 223.48764, 1)
+material = ExtResource("15_yo1j3")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Walls" unique_id=1991099891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.526367, 26.67717, 275.13177)
+size = Vector3(317.90594, 223.48764, 1)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Walls" unique_id=1851560475]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, -76.72765, 118.1194)
+size = Vector3(405.6161, 327.50836, 1)
+material = ExtResource("15_yo1j3")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Walls" unique_id=62784044]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 40.623337, 127.11814, 118.1194)
+size = Vector3(405.6161, 327.50836, 1)
+
+[node name="window2" parent="." unique_id=1354990923 instance=ExtResource("16_rb60s")]
+transform = Transform3D(14.468944, 0, 0, 0, 10.537306, 0, 0, 0, 1, -9.9359, 70.62442, -29.227856)
+visible = false
+
+[node name="window" parent="." unique_id=322867922 instance=ExtResource("17_bimrl")]
+transform = Transform3D(13.427844, 0, 0, 0, 9.3139105, 0, 0, 0, 1.0000006, -10.099432, 69.08864, -29.614553)
+
+[node name="SunControl" parent="." unique_id=619501683 instance=ExtResource("18_j0h3d")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1919713502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.0957413, 79.80734, 91.26059)
+shadow_enabled = true
+omni_range = 177.30307
+omni_attenuation = 0.516
+
+[node name="waves_viewer_machine" parent="." unique_id=251879435 instance=ExtResource("19_s7opg")]
+transform = Transform3D(-6.3299994, 0, 0.0015463659, 0, 6.33, 0, -0.0015463659, 0, -6.3299994, -15.55238, -3.7999535, 2.1643753)
+
+[node name="HeartsUI2" type="SubViewport" parent="." unique_id=1131812106]
+transparent_bg = true
+size = Vector2i(300, 500)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="HeartsUI2" unique_id=1567854116]
+
+[node name="ScreenEffect" type="MeshInstance2D" parent="HeartsUI2/CanvasLayer" unique_id=164819885]
+material = SubResource("ShaderMaterial_choun")
+mesh = SubResource("QuadMesh_tipki")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="HeartsUI2/CanvasLayer" unique_id=1029067658]
+copy_mode = 2
+
+[node name="ScreenPixelation" type="MeshInstance2D" parent="HeartsUI2/CanvasLayer" unique_id=1077793792]
+material = SubResource("ShaderMaterial_ya4ey")
+mesh = SubResource("QuadMesh_eb6dy")
+
+[node name="UIController" type="Control" parent="HeartsUI2" unique_id=625698321]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="HeartsContainer" type="HBoxContainer" parent="HeartsUI2/UIController" unique_id=466600996]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="TextureRect" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=576576916]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("20_x2h4l")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=481992085]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("20_x2h4l")
+expand_mode = 1
+
+[node name="TextureRect3" type="TextureRect" parent="HeartsUI2/UIController/HeartsContainer" unique_id=1731691660]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("20_x2h4l")
+expand_mode = 1
+
+[node name="ScoreUI" type="SubViewport" parent="." unique_id=824969821]
+transparent_bg = true
+size = Vector2i(525, 180)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ScoreUI" unique_id=22398650]
+
+[node name="ScreenEffect" type="MeshInstance2D" parent="ScoreUI/CanvasLayer" unique_id=321936534]
+material = SubResource("ShaderMaterial_choun")
+mesh = SubResource("QuadMesh_tipki")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="ScoreUI/CanvasLayer" unique_id=571107284]
+copy_mode = 2
+
+[node name="ScreenPixelation" type="MeshInstance2D" parent="ScoreUI/CanvasLayer" unique_id=1889291041]
+material = SubResource("ShaderMaterial_ya4ey")
+mesh = SubResource("QuadMesh_eb6dy")
+
+[node name="UIController" type="Control" parent="ScoreUI" unique_id=96203415]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -100.0
+offset_right = 250.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="ScoreUI/UIController" unique_id=2094188988]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ScoreUI/UIController/Control2" unique_id=1028562410]
+position = Vector2(94, 9.536743e-07)
+scale = Vector2(2.927074, 2.7495437)
+sprite_frames = SubResource("SpriteFrames_j8jky")
+autoplay = "default"
+
+[node name="Score" type="Label" parent="ScoreUI/UIController" unique_id=1170022281]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -84.44792
+offset_bottom = 84.44792
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 121
+text = "0"
+
+[node name="HeartsUI" type="MeshInstance3D" parent="." unique_id=772517853]
+transform = Transform3D(1.1034625, 0, 0, 0, 0.3794316, 0, 0, 0, 1, 57.29767, 15.889421, 20.523443)
+material_override = SubResource("StandardMaterial3D_2f3dj")
+mesh = SubResource("QuadMesh_pm3ni")
+skeleton = NodePath("../ScoreUI2")
+
+[node name="ScoreUI2" type="MeshInstance3D" parent="." unique_id=894489083]
+transform = Transform3D(1.0815314, 0, 0, 0, 0.38525444, 0, 0, 0, 1, 56.996292, 1.2628045, 21.050362)
+material_override = SubResource("StandardMaterial3D_fv21b")
+mesh = SubResource("QuadMesh_tel4y")
+
+[node name="table" parent="." unique_id=1457087688 instance=ExtResource("22_0s5qc")]
+transform = Transform3D(42.97575, 0, 0, 0, 30, 0, 0, 0, 30, -2.6255722, -110.36323, -5.387802)
+
+[node name="PauseButton" type="Button" parent="." unique_id=678812264]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -103.0
+offset_right = -157.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/hover = SubResource("StyleBoxFlat_vxglm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vxglm")
+icon = ExtResource("23_wxl41")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="EndScreen" type="Control" parent="." unique_id=1528639391]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="EndScreen" unique_id=1898114398]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndScreen/Panel" unique_id=683777082]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="EndScreen/Panel/VBoxContainer" unique_id=1424466750]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 58
+text = "Game Over"
+
+[node name="Label2" type="Label" parent="EndScreen/Panel/VBoxContainer" unique_id=358853357]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Score: 100"
+
+[node name="Control" type="Control" parent="EndScreen/Panel/VBoxContainer" unique_id=1248843435]
+custom_minimum_size = Vector2(0.25, 100)
+layout_mode = 2
+
+[node name="RestartButton" type="Button" parent="EndScreen/Panel/VBoxContainer" unique_id=292904750]
+layout_mode = 2
+theme = ExtResource("24_emjxo")
+text = "Restart"
+
+[node name="PauseScreen" type="Control" parent="." unique_id=13337704]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="PauseScreen" unique_id=466163271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseScreen/Panel" unique_id=1914883898]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseScreen/Panel/VBoxContainer" unique_id=1457655763]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 58
+text = "Game Paused"
+
+[node name="Control" type="Control" parent="PauseScreen/Panel/VBoxContainer" unique_id=243812463]
+custom_minimum_size = Vector2(0.25, 100)
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="PauseScreen/Panel/VBoxContainer" unique_id=48502020]
+layout_mode = 2
+theme = ExtResource("24_emjxo")
+text = "Continue"
+
+[node name="UIController" type="Control" parent="." unique_id=1948328870]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("25_ddqyk")
+heart_sprite = ExtResource("20_x2h4l")

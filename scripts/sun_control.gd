@@ -4,6 +4,7 @@ extends Node3D
 @onready var blinds: Node3D = $Blinds
 @onready var up_button: Area3D = $blinds_switch/UpButton
 @onready var down_button: Area3D = $blinds_switch/DownButton
+@onready var world_environment: WorldEnvironment = $"../WorldEnvironment"
 
 var mouse_position
 var selected_button
@@ -39,6 +40,7 @@ func _process(delta: float) -> void:
 
 		if blinds.position.y != old_y:
 			#print("update sun control")
+			world_environment.environment.background_energy_multiplier += (blinds.position.y - old_y) * 0.15
 			updated.emit()
 
 

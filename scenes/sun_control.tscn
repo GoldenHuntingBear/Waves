@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://itv8kxfetsow"]
+
+[ext_resource type="Script" uid="uid://c3sggkqobk00s" path="res://scripts/sun_control.gd" id="1_q5pki"]
+[ext_resource type="PackedScene" uid="uid://b7qr7up7qh0wa" path="res://scenes/blinds_switch.tscn" id="2_ykrph"]
+[ext_resource type="Material" uid="uid://yk0c5e2ncpwr" path="res://materials/blinds_mat.tres" id="3_cxyuy"]
+
+[node name="SunControl" type="Node3D" unique_id=619501683]
+script = ExtResource("1_q5pki")
+
+[node name="blinds_switch" parent="." unique_id=1279228306 instance=ExtResource("2_ykrph")]
+transform = Transform3D(4.2989573, 0, 0, 0, 3.9321392, 0, 0, 0, 3.517714, -74.41091, 71.32278, -16.722366)
+
+[node name="Blinds" type="Node3D" parent="." unique_id=1199613896]
+transform = Transform3D(0.636289, 0, 0, 0, 1, 0, 0, 0, 1, -11.291857, 80, -16.186)
+
+[node name="BlindsTexture" type="CSGBox3D" parent="Blinds" unique_id=273724947]
+gi_mode = 2
+size = Vector3(173.27063, 75.3123, 1)
+material = ExtResource("3_cxyuy")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Blinds" unique_id=1370119446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6412506, -36.402496, 0.060302734)
+gi_mode = 2
+size = Vector3(173.93643, 2.3291016, 2.3012695)
+
+[editable path="blinds_switch"]
