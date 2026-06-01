@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b7qwt42xflb5q" path="res://assets/waves_viewer_machine.blend" id="21_yc10j"]
 [ext_resource type="Script" uid="uid://dg5r86gdstsrj" path="res://scripts/ui_controller.gd" id="22_jscy8"]
 [ext_resource type="Texture2D" uid="uid://4gbnrimhkfg" path="res://assets/heart.png" id="23_pm3ni"]
+[ext_resource type="Script" uid="uid://bkga22oj0epei" path="res://scenes/input_hints.gd" id="24_og1vs"]
 [ext_resource type="Texture2D" uid="uid://dlji36eqg5e4j" path="res://assets/coin_spritesheet.png" id="24_y6deb"]
 [ext_resource type="Theme" uid="uid://c4vmdm81yol20" path="res://main_theme.tres" id="25_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://baekjdx3lbj0o" path="res://assets/table.blend" id="25_og1vs"]
@@ -486,6 +487,7 @@ offset_right = -117.0
 offset_bottom = -39.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_force_pass_scroll_events = false
 theme_override_styles/hover = SubResource("StyleBoxFlat_jqpb0")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vtlaw")
 icon = ExtResource("25_vxglm")
@@ -501,6 +503,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_force_pass_scroll_events = false
 
 [node name="Panel" type="Panel" parent="EndScreen" unique_id=1650728251]
 layout_mode = 1
@@ -552,6 +555,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_force_pass_scroll_events = false
 
 [node name="Panel" type="Panel" parent="PauseScreen" unique_id=1438186265]
 layout_mode = 1
@@ -595,5 +599,29 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_force_pass_scroll_events = false
 script = ExtResource("22_jscy8")
 heart_sprite = ExtResource("23_pm3ni")
+
+[node name="InputHints" type="Node3D" parent="." unique_id=1308197369]
+script = ExtResource("24_og1vs")
+
+[node name="blinds_up" type="Label3D" parent="InputHints" unique_id=946386035]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -15.968324, 11.613135, 5.6342134)
+text = "Up"
+font_size = 64
+
+[node name="blinds_down" type="Label3D" parent="InputHints" unique_id=544490531]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -15.968324, 9.98126, 5.6342134)
+text = "Down"
+font_size = 64
+
+[node name="radio_frequency_up" type="Label3D" parent="InputHints" unique_id=139650793]
+transform = Transform3D(0.43755507, 0, 0.8991914, 0, 1, 0, -0.8991914, 0, 0.43755507, -12.699244, 8.963094, -3.780092)
+text = "Up"
+font_size = 52
+
+[node name="radio_frequency_down" type="Label3D" parent="InputHints" unique_id=585671631]
+transform = Transform3D(0.43755507, 0, 0.8991914, 0, 1, 0, -0.8991914, 0, 0.43755507, -13.420956, 8.963094, -2.3020062)
+text = "Down"
+font_size = 52

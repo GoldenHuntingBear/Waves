@@ -5,6 +5,9 @@ class_name RotationSelector
 @export var max_rotation: float
 @export var area: Area3D
 @export var mesh_to_rotate: MeshInstance3D
+@export var up_input_name: String
+@export var down_input_name: String
+@export var speed: float = 1.
 @export var debug: bool = false
 
 var can_be_controlled: bool = true
@@ -14,6 +17,8 @@ var starting_rotation: float
 var in_area: bool = false
 var selected: bool = false
 var angle = 0
+var up_input
+var down_input
 
 signal updated
 
@@ -24,10 +29,7 @@ func _ready() -> void:
 	angle = mesh_to_rotate.rotation.z
 
 
-func _process(_delta: float) -> void:
-	if debug:
-		pass
-
+func _process(delta: float) -> void:
 	if in_area and mouse_clicked:
 		if not selected:
 			starting_rotation = mesh_to_rotate.rotation.z
@@ -40,13 +42,33 @@ func _process(_delta: float) -> void:
 	if selected or in_area:
 		Input.set_default_cursor_shape(Input.CURSOR_HSIZE)
 
-	if not can_be_controlled or not selected:
+	var rot_to_add = null
+
+	if can_be_controlled and selected:
+		var mouse_position = get_viewport().get_mouse_position()
+		rot_to_add = (mouse_position.x - mouse_position_when_clicked.x) * 0.01
+
+	if InputMap.action_get_events(up_input_name)[0] is InputEventMouseButton:
+		up_input = Input.is_action_just_released(up_input_name)
+
+	if InputMap.action_get_events(down_input_name)[0] is InputEventMouseButton:
+		down_input = Input.is_action_just_released(down_input_name)
+
+	if up_input:
+		starting_rotation = mesh_to_rotate.rotation.z
+		rot_to_add = speed * delta
+
+	if down_input:
+		starting_rotation = mesh_to_rotate.rotation.z
+		rot_to_add = -speed * delta
+
+	if not rot_to_add:
 		return
 
 	var mouse_position = get_viewport().get_mouse_position()
 	#print("mouse not in area and not clicked (in process), resetting selector")
 
-	var new_tried_rotation = (mouse_position.x - mouse_position_when_clicked.x) * 0.01 + starting_rotation
+	var new_tried_rotation = rot_to_add + starting_rotation
 	var old_rotation = mesh_to_rotate.rotation.z
 	var new_rotation = clamp(new_tried_rotation, deg_to_rad(min_rotation), deg_to_rad(max_rotation))
 
@@ -68,6 +90,12 @@ func _input(event):
 
 		if not event.pressed:
 			mouse_clicked = false
+
+	if event.is_action(up_input_name):
+		up_input = event.pressed
+
+	if event.is_action(down_input_name):
+		down_input = event.pressed
 
 
 func begin_selector_control():

@@ -10,6 +10,8 @@ var mouse_position
 var selected_button
 var mouse_clicked: bool = false
 var in_area: bool = false
+var up_input: bool = false
+var down_input: bool = false
 
 const MAX_POSITION = 110
 const MIN_POSITION = 80
@@ -29,11 +31,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	mouse_position = get_viewport().get_mouse_position()
 
-	if in_area and mouse_clicked:
+	if (in_area and mouse_clicked) or up_input or down_input:
 		var direction = -1
 
-		if selected_button == up_button:
-			direction = 1
+		if (in_area and mouse_clicked):
+			if selected_button == up_button:
+				direction = 1
+		else:
+			direction = 1 if up_input else -1
 
 		var old_y = blinds.position.y
 		blinds.position.y = clamp(blinds.position.y + direction * delta * 40, MIN_POSITION, MAX_POSITION)
@@ -48,6 +53,18 @@ func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and event.button_index == 1:
 		mouse_clicked = event.pressed
+
+	if event.is_action_pressed("blinds_up"):
+		up_input = true
+
+	if event.is_action_released("blinds_up"):
+		up_input = false
+
+	if event.is_action_pressed("blinds_down"):
+		down_input = true
+
+	if event.is_action_released("blinds_down"):
+		down_input = false
 
 
 func begin_button_pressed(button: Area3D):
